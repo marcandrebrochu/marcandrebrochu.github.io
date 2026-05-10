@@ -1,0 +1,417 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Characteristic classes (Part 1, Cohomology) :: Marc-André Brochu&#39;s Oueb Site</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TODO: I need to fix the commutative diagrams in this post because they just don&rsquo;t show up right now.
+I&rsquo;m planning on writing a series of posts that explore the theory and applications of characteristic classes in algebraic topology, following the book from Milnor and Stasheff. Here I start with the appendix A, where homology is discussed and basic theorems are laid out. This post will also serve me well as a quick reminder, since I keep forgetting small details and ideas regarding (singular) (co)homology. Many results and explanations can be found in Hatcher&rsquo;s book.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/2025-02-13-characteristic-classes-pt1/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a2cc694a9b481f15d41722bffc2cc54eea4c4f74fd9072b0b33253604c22606e.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Characteristic classes (Part 1, Cohomology)">
+<meta property="og:description" content="TODO: I need to fix the commutative diagrams in this post because they just don&rsquo;t show up right now.
+I&rsquo;m planning on writing a series of posts that explore the theory and applications of characteristic classes in algebraic topology, following the book from Milnor and Stasheff. Here I start with the appendix A, where homology is discussed and basic theorems are laid out. This post will also serve me well as a quick reminder, since I keep forgetting small details and ideas regarding (singular) (co)homology. Many results and explanations can be found in Hatcher&rsquo;s book.
+" />
+<meta property="og:url" content="//localhost:1313/posts/2025-02-13-characteristic-classes-pt1/" />
+<meta property="og:site_name" content="Marc-André Brochu&#39;s Oueb Site" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-02-13 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['@@', '@@']],
+      inlineMath: [['@', '@']],
+    },
+    loader: {
+      load: ['ui/safe'],
+    },
+  };
+</script>
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Marc-André Brochu&#39;s Oueb Site
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://github.com/marcandrebrochu">GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu">YouTube</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://github.com/marcandrebrochu" >GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu" >YouTube</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/2025-02-13-characteristic-classes-pt1/">Characteristic classes (Part 1, Cohomology)</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-02-13</time></div>
+
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#singular-homology">Singular homology</a>
+      <ul>
+        <li><a href="#some-abstract-nonsense">Some abstract nonsense</a></li>
+        <li><a href="#reduced-homology">Reduced homology</a></li>
+        <li><a href="#mayer-vietoris-sequence">Mayer-Vietoris sequence</a></li>
+        <li><a href="#relative-homology">Relative homology</a></li>
+      </ul>
+    </li>
+    <li><a href="#singular-cohomology">Singular cohomology</a>
+      <ul>
+        <li><a href="#universal-coefficient-theorem-for-cohomology">Universal coefficient theorem for cohomology</a></li>
+      </ul>
+    </li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p><em>TODO: I need to fix the commutative diagrams in this post because they just don&rsquo;t show up right now.</em></p>
+<p>I&rsquo;m planning on writing a series of posts that explore the theory and applications of characteristic classes in algebraic topology, following the book from Milnor and Stasheff. Here I start with the appendix A, where homology is discussed and basic theorems are laid out. This post will also serve me well as a quick reminder, since I keep forgetting small details and ideas regarding (singular) (co)homology. Many results and explanations can be found in Hatcher&rsquo;s book.</p>
+<h2 id="singular-homology">Singular homology<a href="#singular-homology" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The <strong>standard @n@-simplex</strong> is the set @\Delta^n \subseteq \mathbb{R}^{n+1}@ consisting of all @(n+1)@-tuples @(t_0,t_1,\dots,t_n)@ with the following two properties:</p>
+<ul>
+<li>for each @i@, we have @t_i \geq 0@;</li>
+<li>and @\sum t_i = 1@.</li>
+</ul>
+<p>The second property says that points in @\Delta^n@ are such that the dot product of the vector @(t_0-1,t_1,\dots,t_n)@ with the vector @n=(1,1,\dots,1)@ is zero, i.e. @\Delta^n@ lies in the @n@-hyperplane with normal @n@, translated by one unit in any direction. Hence each @\Delta^n@ is an affine space of dimension @n@. For instance:</p>
+<ul>
+<li>@\Delta^0@ is a single point @1 \in \mathbb{R}@;</li>
+<li>@\Delta^1@ is the line segment in @\mathbb{R}^2@ going up from @(1,0)@ to @(0,1)@;</li>
+<li>@\Delta^2@ is the (filled) triangle in @\mathbb{R}^3@ having as vertices the three standard basis vectors;</li>
+<li>etc.</li>
+</ul>
+<p>As a special case, we also define @\Delta^{-1}@ to be the empty set.</p>
+<p>In general each @\Delta^n@ has @(n+1)@ <strong>vertices</strong>, which are the points in @\Delta^n@ corresponding to the standard basis vectors. Another way to talk about the standard @n@-simplex is to say it is the <em>convex hull</em> of the standard basis vectors in @\mathbb{R}^{n+1}@. We can label each vertex with an integer @i@, where @i@ is the (zero-based) position of the unique @1@ in the standard basis vector corresponding to that vertex.</p>
+<p>For each @0 \leq i \leq n@, we have a way to talk about the <strong>@i@-th side</strong> of a standard @n@-simplex via the function @\phi_i : \Delta^{n-1} \to\Delta^n@, which is defined as
+</p>
+@@\phi_i(t_0,\dots, \widehat{t_i},\dots,t_n) = (t_0,\dots,t_{i-1},0,t_{i+1},\dots,t_n).@@<p>
+(As usual the hat over a variable in an enumeration means that variable is actually omitted from the enumeration.) Thus the @i@-th side is the convex hull of all vertices of @\Delta^n@ that are not labelled with @i@. Notice that @\phi_i@ is actually an affine embedding. Moreover, it gives an orientation to each side of a standard simplex: the orientation is positive @i@ is even, and negative otherwise.</p>
+<p>Again, as a special case, we define the @0@-th side of @\Delta^0@ to be the unique function
+@\phi_0 : \Delta^{-1} \to \Delta^0@
+from the empty set (i.e. @\Delta^{-1}@) to the singleton @\{1\}@ (i.e. @\Delta^0@).</p>
+<p>Let @X@ be any topological space. A <strong>singular @n@-simplex</strong> in @X@ is a continuous map from @\Delta^n@ to @X@. The idea here is to identify such a map with its image; since there are no restrictions on what this image may look like except that nearby points stay nearby (continuity), there could be collapsing or other weird things happening to @\Delta^n@ when viewed through the map. That&rsquo;s why it&rsquo;s called a <em>singular</em> simplex.</p>
+<p>For @0 \leq i \leq n@, the <strong>@i@-th face</strong> of a singular @n@-simplex @\sigma : \Delta^n \to X@ is the singular @(n-1)@-simplex given by
+</p>
+@@\sigma \circ \phi_i : \Delta^{n-1} \to X.@@<p>For each @n\geq 0@, the <strong>singular chain group</strong> @C_n(X;Λ)@ with coefficients in a commutative ring @Λ@ is the free @Λ@-module having one generator for each singular @n@-simplex @\sigma@ in @X@. In other words, @C_n(X;Λ)@ consists of the formal @Λ@-linear combinations of @n@-simplices in @X@:
+</p>
+@@C_n(X;Λ) = \bigoplus_{\sigma : \Delta^n \to X} Λ.@@<p>
+Notice that this is a <em>module</em>, even though we use the term <em>group</em>. Just another fun little opportunity to be confused down the line. When @n<0@, the singular chain group is defined to be the zero module. In the special case @Λ = \mathbb{Z}@, the singular chain group at @n@ is the free abelian group on the singular @n@-simplices.</p>
+<p>The singular chain group is the algebraic realization of how &ldquo;sticking triangles on a space&rdquo; works. If @Λ = \mathbb{Z}/2\mathbb{Z}@, then glueing two copies of the same simplex one on top of another means they &ldquo;cancel out&rdquo;, and when only one of their sides are overlapping, these overlapping sides also cancel out; you obtain a square in the space instead of two triangles. Many geometric arguments use the fact that sides on the boundaries cancel out. The precise meaning of this in @C_n(X;Λ)@ is given by the <strong>boundary homomorphism</strong>, which is a @Λ@-linear map @∂: C_n(X;Λ) \to C_{n-1}(X;Λ)@ defined as
+</p>
+@@∂\sigma = \sum_{i=0}^n (-1)^i(\sigma \circ \phi_i).@@<p>
+This definition is made for @n \geq 1@; if @n \leq 0@ we simply say @∂= 0@.
+The sign in the formula represents the orientation of each side (recall: the @i@-th side has positive orientation when @i@ is even, and negative orientation otherwise). This is done because we need &ldquo;identical sides&rdquo; that are &ldquo;going in opposite directions&rdquo; to cancel out in many geometrical arguments. For instance, the boundary of a tiling of some region of space by triangles (i.e. a sum in the singular chain group @C_2@) should be the boundary of the region, <em>not</em> the sum of the individual boundaries of each triangle (for instance, think about the proof of Stoke&rsquo;s formula).</p>
+<p>An important property of the boundary homomorphism is this: @∂^2 = 0@. Intuitively: the boundary of the boundary is empty. Think of @\Delta^2@, which is a (filled) triangle, and think about it as a singular simplex in @\mathbb{R}^2@ (maybe via the projection on the plane in which @\Delta^2@ lies). Its boundary is the formal sum of three line segments. These segments are all perfectly lined up so that the end of the one is the start of the next: they form a cycle. Moreover, the point corresponding to the end of one segment has the opposite orientation to the point corresponding to the start of the next segment, so they cancel out. Since these endpoints are the boundaries of each of the three line segment, and since they all cancel out, the boundary of the boundary is effectively zero.</p>
+<p>In fact, the boundary of a singular chain is zero precisely when all of the summands in the chain are arranged so that their boundaries all cancel out, that is, when they form a cycle and &ldquo;enclose&rdquo; some region of space. We define the <strong>@n@-cycles</strong> to be the set of all such chains:
+</p>
+@@Z_n(X;Λ) = \ker (∂: C_n(X;Λ) \to C_{n-1}(X;Λ)).@@<p>
+The <strong>@n@-boundaries</strong> is the set of all chains that can be expressed as the boundary of some @(n+1)@-dimensional singular chain:
+</p>
+@@B_n(X;Λ) = \operatorname{im} (∂: C_{n+1}(X;Λ) \to C_n(X;Λ)).@@<p>
+The identity @∂^2 = 0@ says we have a containment of @Λ@-submodules
+</p>
+@@B_n(X;Λ) \subseteq Z_n(X;Λ).@@<p>
+Hence we can consider the <strong>@n@-th singular homology group</strong>
+</p>
+@@H_n(X;Λ) = Z_n(X;Λ)/B_n(X;Λ).@@<p>The homology group captures in algebra an intuitive spatial fact. We have seen that any cycle &ldquo;encloses&rdquo; a region of space, by sticking together simplices of the same dimension along their boundaries until none are &ldquo;left alone&rdquo; (each boundary has a matching, opposite, boundary). Now suppose a given cycle is itself the boundary of some higher-dimensional simplex @\Delta@. Now the cycle can &ldquo;move inside&rdquo; @\Delta@ without breaking appart, shrinking until it becomes a single point. If a cycle is not a boundary, it means that something about the space @X@ obstructs the construction of a simplex @\Delta@ which would have the cycle as its boundary: there&rsquo;s a hole in @X@. Notice that the condition of continuity on singular simplices is essential here: the hole would basically force any @\Delta@ to be torn appart if it were to have the cycle as a boundary, breaking continuity. In this way, the homology construction detects holes in @X@ and gives useful information about them. This technology could be used to make a precise definition of what a &ldquo;hole&rdquo; in a topological space is: a hole is a generator for the homology group.</p>
+<h3 id="some-abstract-nonsense">Some abstract nonsense<a href="#some-abstract-nonsense" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>Homology is a functor from the category of topological spaces up to homotopy, to the category of @Λ@-modules. The source category&rsquo;s objects are topological spaces, and the arrows are equivalence classes of continuous maps, where two maps are considered to be the same when they are homotopic. Since I always forget the details of what this means, here they are: consider two continuous maps @f,g : X \to Y@ between topological spaces. We say they are <strong>homotopic</strong> when there exists another continuous map @H : X \times [0,1] \to Y@ (called an <strong>homotopy</strong>) such that @H({-},0)=f@ and @H({-},1)=g@. In the source category we&rsquo;re interested in, an arrow is a actually a set of continous maps, all homotopic to each other.</p>
+<p>Functoriality gives us the following for free: if two spaces are homotopic, then they have isomorphic homology groups. In particular, since @\mathbb{R}^n@ is contractible (i.e. homotopy equivalent to a point) for any @n \geq 0@, we have a concrete homology computation: for any @i \geq 1@,
+\begin{equation*}
+H_i(\mathbb{R}^n;Λ) \cong H_i({p};Λ) = 0.
+\end{equation*}
+(It&rsquo;s easy to compute homology of a point: all singular simplices are the same!) When @i=0@, things are a bit weird, and fixing weird things is the purpose of the next section.</p>
+<h3 id="reduced-homology">Reduced homology<a href="#reduced-homology" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>There&rsquo;s a technical point to address here. Consider what happens when we take the space @X@ to be a single point @p@ and we compute the @0@-th homology group. Since singular @1@-simplices are continuous maps @\Delta^1 \to \{p\}@, all @1@-simplices are actually the same. Hence they are all cycles, so by definition their boundaries are zero: @B_0(\{p\};Λ) = 0@. Therefore @H_0(\{p\};Λ) \cong Z_0(\{p\};Λ)@. However, we set @∂@ to be the zero map for all @n\leq 0@ earlier, so @H_0(\{p\};Λ)@ is @C_0(\{p\};Λ)@, the free module generated by all @0@-simplices. Since they are all the same, there&rsquo;s actually only one generator, so @H_0(\{p\};Λ) \cong Λ@. For technical reasons, it&rsquo;s better for the zeroth homology of a point to be the zero module; also, it makes sense intuitively, since we expect the homology to measure holes in a space, and we feel a point doesn&rsquo;t have holes.</p>
+<p>There&rsquo;s an easy fix to this. Instead of having @∂= 0@ at degree zero, we set @C_{-1}(X;Λ)@ to be @Λ@ (recall: we made a special case above, where the only singular @(-1)@-simplex is the unique function from the empty set @\Delta^{-1}@ to @X@; then the chain group of degree @-1@ has to be the free @Λ@-module generated by that single @(-1)@-simplex), and now we may define @∂@ at degree zero with the same formula we used for positive degrees. For any singular @0@-simplex @\sigma : \Delta^0 \to X@, we now have
+</p>
+@@∂\sigma = \sigma \circ \phi_0,@@<p>
+which is the unique function from the empty set to @X@, and which is identified with @1 \in Λ@. Therefore @∂@ corresponds to the identity map on @Λ@. This means @Z_0(\{p\};Λ)@ is trivial, and so is this modified homology at degree zero.</p>
+<p>This modified homology is called <strong>reduced singular homology</strong> and its homology groups are denoted with a tilde:
+</p>
+@@\widetilde{H}_i(X;Λ).@@<p>
+Since the only modification happens at degree zero, we have
+</p>
+@@\widetilde{H}_i(X;Λ)=H_i(X;Λ)@@<p>
+for each @i \geq 1@. In general, we see that for any @0@-chain @a_1\sigma_1+\dots+a_k\sigma_k@ (these are just formal linear combinations of points in @X@) we have
+</p>
+@@∂_0(a_1\sigma_1+\dots+a_k\sigma_k) = \sum_{i=1}^k a_i \in Λ.@@<p>There is an easy way to get from unreduced homology to reduced homology: at all positive dimensions the groups are the same, and at dimension zero we have the equation
+</p>
+@@H_0(X;Λ) \cong \widetilde{H}_0(X;Λ) \oplus Λ.@@<p>
+(Hint: think about what happens if @X@ is path-connected, and which @0@-chains are boundaries.)</p>
+<h3 id="mayer-vietoris-sequence">Mayer-Vietoris sequence<a href="#mayer-vietoris-sequence" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>A great tool for computing with homology. It works for &ldquo;unreduced&rdquo; and reduced homology (just replace @H@ with @\widetilde{H}@ everywhere). Let @A@ and @B@ be two subsets of @X@ such that their interior cover @X@ (and for reduced homology, we also want their intersection to be nonempty). Then there is a long exact sequence in homology</p>
+<!-- raw HTML omitted -->
+<p>We can use this to compute the homology of the @n@-sphere @S^n@. Let @A@ be the &ldquo;open north cap&rdquo; and @B@ be the &ldquo;open south cap&rdquo;, i.e. @A@ and @B@ are contractible open sets in @S^n@ such that their intersection is homotopic to the &ldquo;equator&rdquo; @S^{n-1}@. Then the reduced Mayer-Vietoris sequence looks like</p>
+<!-- raw HTML omitted -->
+<p>Because @A@ and @B@ are contractible, the middle term above is zero for all @i \in \mathbb{Z}@, so we have a collection of isomorphisms @\widetilde{H}_i(S^n) \cong \widetilde{H}_{i-1}(S^{i-1})@. Since @\widetilde{H}_0(S^0) = Λ@ and zero otherwise, we find by induction on @n@ the following calculation:
+</p>
+@@
+\begin{align*}
+\widetilde{H}_i(S^n;Λ) =
+\begin{cases}
+Λ & \text{if $i = n$} \\
+0 & \text{otherwise.}
+\end{cases}
+\end{align*}
+@@<h3 id="relative-homology">Relative homology<a href="#relative-homology" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>We now consider pairs @(X,A)@ where @A@ is any subspace of @X@ (including the empty subspace, and the full subspace). We&rsquo;re going to look at homology &ldquo;modulo @A@&rdquo;, in the sense that any singular simplex whose image lies completely in @A@ is going to be considered as &ldquo;completely collapsed&rdquo;, i.e. zero as a chain. Formally, we define the <strong>relative @n@-th singular chain group</strong> to be
+</p>
+@@C_n(X,A;Λ) = C_n(X;Λ)/C_n(A;Λ).@@<p>Because @∂@ carries chains in @A@ to chains in @A@, we obtain a chain complex &ldquo;modulo @A@&rdquo; and we can define relative homology as
+</p>
+@@H_n(X,A;Λ) = Z_n(X,A;Λ)/B_n(X,A;Λ).@@<p>Any pair @(X,A)@ gives an exact sequence of @Λ@-modules</p>
+<!-- raw HTML omitted -->
+<p>From the general theory of abelian categories, we obtain from it a <strong>long exact sequence in homology</strong>:</p>
+<!-- raw HTML omitted -->
+<p>This long exact sequence also exists for reduced homology.</p>
+<p>An important tool for working with homology is the <strong>excision theorem</strong>: let @A@ and @B@ be two subspaces of @X@ such that their interior cover @X@; then the inclusion @(B,A\cap B) \hookrightarrow (X,A)@ induces isomorphisms
+</p>
+@@H_n(B,A\cap B) \cong H_n(X,A)@@<p>
+for all @n \in \mathbb{Z}@. Equivalently, for any subspaces @Z \subseteq A \subseteq X@ such that the closure of @Z@ is contained in the interior of @A@, the obvious inclusion induces isomorphisms
+</p>
+@@H_n(X-Z, A-Z; Λ) \cong H_n(X, A; Λ).@@<p>
+This version of the statement is what justifies the name &ldquo;excision&rdquo;, since it gives us conditions under which we may excise @Z@ from @X@ without changing the homology groups. That is insanely powerful. For instance, here&rsquo;s a proof of the so-called Brouwer&rsquo;s invariance of domain: if @U \subseteq \mathbb{R}^m@ and @V \subseteq \mathbb{R}^n@ are two nonempty homeomorphic open sets, then @m=n@. The idea of the proof is to look at what happens locally around a point, so we define <strong>local homology groups</strong> around some point @p \in X@ by
+</p>
+@@H_{n,p}(X;Λ) = H_n(X,X-\{p\};Λ).@@<p>
+Back to the proof. Let @f : U \to V@ be a homeomorphism and pick some point @x \in U@. Then, by excision, we have @H_{n,x}(U) \cong H_{n,x}(\mathbb{R}^m)@. (Hint: in the excision theorem, pick @A@ to be the complement of @\{x\}@ and pick @B@ to be @U@). The long exact sequence for the pair @(\mathbb{R}^m,\mathbb{R}^m-\{x\})@ looks like:</p>
+<!-- raw HTML omitted -->
+<h2 id="singular-cohomology">Singular cohomology<a href="#singular-cohomology" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>Since all elements in a @Λ@-module @M@ may be identified with the @Λ@-linear maps </p>
+@@Λ \to M,@@<p> we may dualize and consider linear maps of the same kind but having opposite polarity: this we do. The <strong>@n@-th cochain group</strong> is the dual module
+</p>
+@@C^n(X;Λ) = \operatorname{Hom}_Λ(C_n(X;Λ), Λ),@@<p>
+consisting of all @Λ@-linear maps going from the singular chain group into its ring of scalars. A cochain is just a way to (linearly) compute a scalar quantity from a singular chain. There&rsquo;s an analogy to be made with geometry: you have points in some affine space (singular chains), and you have coordinates (cochains), which in a way compute a number from each point. In geometry, there&rsquo;s a strong link between points and coordinates: studying algebraic varieties is essentially the same as studying rings of coordinates, which are basically rings of polynomial functions from the space to the underlying field. However, it is easier to work with coordinates than sets of points, because there&rsquo;s a natural ring structure. Hence, if this analogy is to hold, one would expect a link between homology and cohomology; moreover, it should be easier to work with cohomology than homology. And so it is.</p>
+<p>The <strong>value</strong> of a cochain @c@ on a chain @\gamma@ will be denoted @\langle c, \gamma \rangle@ and is defined as
+</p>
+@@\langle c, \gamma \rangle = c(\gamma) \in Λ.@@<p>
+Obviously @\langle {-},{-}\rangle : C^n(X;Λ) \times C_n(X;Λ) \to Λ@ is @Λ@-bilinear.</p>
+<p>The <strong>coboundary</strong> of a cochain @c \in C^n(X;Λ)@ is defined to be the cochain @\delta c \in C^{n+1}(X;Λ)@ whose value on each @(n+1)@-chain @\alpha@ is determined by the identity
+</p>
+@@\langle \delta c, \alpha\rangle + (-1)^n\langle c, ∂\alpha \rangle = 0.@@<p>
+Hence @\delta@ is, up to sign, the dual of @∂@, in the sense that for any cochain @c@, the cochain @\delta c@ is, up to sign, the pullback of @c@ along @∂@:</p>
+<!-- raw HTML omitted -->
+<p>Again, this definition has intuitive content: since @c@ is able to &ldquo;measure&rdquo;, or &ldquo;give coordinates&rdquo;, any @n@-chain, then it should be possible to obtain a way to measure @(n+1)@-chains @\alpha@ by combining measures for the boundaries of @\alpha@.</p>
+<p>The coboundary homomorphism, just like its dual friend, verifies @\delta^2 = 0@. Therefore, if we define <strong>@n@-cocycles</strong> to be
+</p>
+@@Z^n(X;Λ) = \ker(\delta : C^n(X; Λ) \to C^{n+1}(X; Λ))@@<p>
+and <strong>@n@-coboundaries</strong> to be
+</p>
+@@B^n(X;Λ) = \operatorname{im}(\delta : C^{n-1}(X;Λ) \to C^n(X;Λ),@@<p>
+then we may also define the <strong>@n@-th singular cohomology group</strong> by
+</p>
+@@H^n(X;Λ) = Z^n(X;Λ)/B^n(X;Λ).@@<h3 id="universal-coefficient-theorem-for-cohomology">Universal coefficient theorem for cohomology<a href="#universal-coefficient-theorem-for-cohomology" class="hanchor" ariaLabel="Anchor">#</a> </h3>
+<p>Instead of using the ring @Λ@ as coefficients, we may also use any @Λ@-module @M@. If @Λ@ is a principal ideal domain, then there is a natural split exact sequence</p>
+<!-- raw HTML omitted -->
+<p>This exact sequence measures how close the cohomology group is to be the dual of homology.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/2025-02-22-skyscraper-sheaves/" class="button inline prev">
+        &lt; [<span class="button__text">Skyscraper sheaves</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/2025-02-08-dominance-order/" class="button inline next">
+         [<span class="button__text">The dominance order on partitions</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+<div id="wcb" class="carbonbadge wcb-d"></div>
+<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+
+  
+</div>
+
+</body>
+</html>

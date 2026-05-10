@@ -1,0 +1,325 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Direct limits, and how to compute them from cofinal subsets :: Marc-André Brochu&#39;s Oueb Site</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Here I talked about computing a direct limit on some cofinal subset. In this post, I want to prove what my assertions.
+Note that direct limits are a special case of colimits, and what I&rsquo;ll talk about can easily be generalized. In particular, colimit may also be computed on cofinal subcategories of their indexing category, and yield equal (&ldquo;isomorphic up to a unique canonical isomorphism&rdquo;) colimits. However, in this post I&rsquo;ll stay in the particular case of direct limits, and I&rsquo;ll try to define things first in terms of elements, to stay as concrete as possible.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/2025-02-22-direct-limits/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a2cc694a9b481f15d41722bffc2cc54eea4c4f74fd9072b0b33253604c22606e.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Direct limits, and how to compute them from cofinal subsets">
+<meta property="og:description" content="Here I talked about computing a direct limit on some cofinal subset. In this post, I want to prove what my assertions.
+Note that direct limits are a special case of colimits, and what I&rsquo;ll talk about can easily be generalized. In particular, colimit may also be computed on cofinal subcategories of their indexing category, and yield equal (&ldquo;isomorphic up to a unique canonical isomorphism&rdquo;) colimits. However, in this post I&rsquo;ll stay in the particular case of direct limits, and I&rsquo;ll try to define things first in terms of elements, to stay as concrete as possible.
+" />
+<meta property="og:url" content="//localhost:1313/posts/2025-02-22-direct-limits/" />
+<meta property="og:site_name" content="Marc-André Brochu&#39;s Oueb Site" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-02-22 00:00:01 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['@@', '@@']],
+      inlineMath: [['@', '@']],
+    },
+    loader: {
+      load: ['ui/safe'],
+    },
+  };
+</script>
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Marc-André Brochu&#39;s Oueb Site
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://github.com/marcandrebrochu">GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu">YouTube</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://github.com/marcandrebrochu" >GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu" >YouTube</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/2025-02-22-direct-limits/">Direct limits, and how to compute them from cofinal subsets</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-02-22</time></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p><a href="/posts/2025-02-22-skyscraper-sheaves/">Here</a> I talked about computing a direct limit on some cofinal subset. In this post, I want to prove what my assertions.</p>
+<p>Note that direct limits are a special case of colimits, and what I&rsquo;ll talk about can easily be generalized. In particular, colimit may also be computed on cofinal subcategories of their indexing category, and yield equal (&ldquo;isomorphic up to a unique canonical isomorphism&rdquo;) colimits. However, in this post I&rsquo;ll stay in the particular case of direct limits, and I&rsquo;ll try to define things first in terms of elements, to stay as concrete as possible.</p>
+<p>Recall that a poset @(A,\leq)@ is called <strong>directed</strong> if any pair of elements in @A@ has an upper bound. For instance, the integers @\mathbb{Z}@ with the usual order make up a rather trivial example of a directed set. Another example which is quite important in algebraic geometry is the set of all open neighborhoods of a given point in a topological space, ordered by reverse inclusion: a natural choice for an upper bound for two such open neighborhoods is given by their intersection.</p>
+<p>When @(A,\leq)@ is a poset, any subset @B \subseteq A@ is also a poset in the order @\leq@. Such a subset is said to be <strong>cofinal</strong> in @A@ if, for any @a \in A@, there exists some @b \in B@ with @a \leq b@. More formally: </p>
+@@\forall (a \in A), \exists (b \in B) : a \leq b.@@<p>
+If we dualize, we obtain the statement: </p>
+@@\exists (a \in A) : \forall (b \in B), b \leq a.@@<p> Hence the concept of being cofinal is dual to the concept of having an upper bound. That was just a quick side remark, it&rsquo;s not really important as far as I know. If @A@ is a directed set and @B@ is cofinal in @A@, then an important fact is that @B@ is <em>also</em> a directed set (hint: two arbitrary elements in @B@ are also in @A@, so they have an upper bound in @A@; by cofinality there&rsquo;s an element of @B@ that&rsquo;s larger than this upper bound).</p>
+<p>Let @\operatorname{C}@ be a category that&rsquo;s &ldquo;algebraic&rdquo;, i.e. objects are &ldquo;sets with some optional extra structure&rdquo; and arrows are &ldquo;set functions which respect that extra structure&rdquo;. For instance, the category @\operatorname{Set}@ itself fits this description, as does the category of groups, or the category of modules over some ring, etc. In these categories, objects have elements, so we can be very concrete in our definitions.</p>
+<p>Let @(I,\leq)@ be a directed set, which we will use to index objects and arrows in @\operatorname{C}@ as follows: we consider @\{A_i\}_{i \in I}@ a collection of objects of @\operatorname{C}@, and a collection of arrow @f_{ij} : A_i \to A_j@ for all pairs @i,j \in I@ with @i \leq j@, such that:</p>
+<ul>
+<li>@f_{ii}@ is the identity on @A_i@ for all @i@; and</li>
+<li>@f_{ik} = f_{jk} \circ f_{ij}@ for all @i \leq j \leq k@.</li>
+</ul>
+<p>You may recognize that this data is exactly a (covariant) functor from the indexing set @I@ (any poset may be interpreted as a category) to @\operatorname{C}@, or in other terminology a <em>diagram of shape @I@ in @\operatorname{C}@</em>. In this article, however, we will not use this terminology, and simply say that the &ldquo;pair&rdquo; @(A_i, f_{ij})@ is a <strong>direct system</strong> over @I@.</p>
+<p>The <strong>direct limit</strong> of a direct system is defined as a set by the equation
+</p>
+@@\underset{\rightarrow}{\operatorname{lim}} A_i = \left(\bigsqcup_{i \in I} A_i\right) \text{mod} \sim,@@<p>
+where @\sim@ is the equivalence relation generated by: two elements @x_i \in A_i@ and @x_j \in A_j@ verify @x_i \sim x_j@ if and only if there is an upper bound @k \in I@ of @i@ and @j@ such that @f_{ik}(x_i) = f_{jk}(x_j)@. In other words, two elements are declared to be equal when they are &ldquo;eventually equal&rdquo; at some large enough index @k@.</p>
+<p>Because @I@ is a directed set, the underlying set we just defined for the direct limit can always be equipped with the appropriate algebraic structure so that it is an object of @\operatorname{C}@:</p>
+<ul>
+<li>
+<p>In the category of groups, define multiplication on @\underset{\rightarrow}{\operatorname{lim}} A_i@ in the following way. Write @[x_i]@ and @[x_j]@ for two equivalence classes that are elements of @\underset{\rightarrow}{\operatorname{lim}} A_i@, so that @x_i \in A_i@ and @x_j \in A_j@. Because @I@ is a directed set, there exists some @k \in I@ such that both @i \leq k@ and @j \leq k@. Now define the operation @\underset{\rightarrow}{\operatorname{lim}} A_i \times \underset{\rightarrow}{\operatorname{lim}} A_i \to \underset{\rightarrow}{\operatorname{lim}} A_i@ by using the group operation in @A_k@:
+</p>
+@@[x_i][x_j] = [f_{ik}(x_i)f_{jk}(x_j)].@@<p>
+This is well-defined. First, we show this definition is independant of the chosen upper bound @k@. Let @k'@ be any other upper bound for @i@ and @j@. Then, because @I@ is a directed set, there exists some @k''@ that is an upper bound of @k@ and @k'@. But now
+</p>
+@@
+\begin{align*}
+f_{k,k''}(f_{i,k}(x_i)f_{j,k}(x_j)) &= f_{k,k''}(f_{i,k}(x_i))f_{k,k''}(f_{j,k}(x_j)) \\
+&= f_{i,k''}(x_i)f_{j,k''}(x_j) \\
+&= f_{k',k''}(f_{i,k'}(x_i))f_{k',k''}(f_{j,k'}(x_j)) \\
+&= f_{k',k''}(f_{i,k'}(x_i)f_{j,k'}(x_j)),
+\end{align*}
+@@<p>
+whence @[f_{i,k}(x_i)f_{j,k}(x_j)] = [f_{i,k'}(x_i)f_{j,k'}(x_j)]@ in @\underset{\rightarrow}{\operatorname{lim}} A_i@.
+Second, we show the definition is independant of the representants of the equivalence classes. Suppose @[x_{i_1}] = [x_{i_2}]@ and @[x_{j_1}] = [x_{j_2}]@. By definition, this means there are @\ell, m \in I@ such that @\ell@ is an upper bound for @i_1@ and @i_2@, @m@ is an upper bound for @j_1@ and @j_2@, and we have @f_{i_1,\ell}(x_{i_1}) = f_{i_2,\ell}(x_{i_2})@ and @f_{j_1,m}(x_{j_1}) = f_{j_2,m}(x_{j_2})@. Now choose any @k \in I@ which is an upper bound for @\ell@ and @m@. In particular, @k@ is an upper bound for @i_1@, @i_2@, @j_1@ and @j_2@. By the first part, the product @[x_{i_1}][x_{j_1}]@ does not depend on @k@, and neither does the product @[x_{i_2}][x_{j_2}]@. But we have
+</p>
+@@
+\begin{align*}
+f_{i_1,k}(x_{i_1})f_{j_1,k}(x_{j_1}) &= f_{\ell,k}(f_{i_1,\ell}(x_{i_1}))f_{m,k}(f_{j_1,m}(x_{j_1})) \\
+&= f_{\ell,k}(f_{i_2,\ell}(x_{i_2}))f_{m,k}(f_{j_2,m}(x_{j_2})) \\
+&= f_{i_2,k}(x_{i_2})f_{j_2,k}(x_{j_2}),
+\end{align*}
+@@<p>
+hence the product is well-defined, as claimed.</p>
+</li>
+<li>
+<p>In the category of rings, addition and multiplication may be done &ldquo;representative-wise&rdquo;, in the same way as what we did with group, simply by sending the two representatives to a common ring @A_k@ using the fact that @I@ is a directed set. This gives a well-defined multiplication and addition, and they respect the axioms of a ring since they are defined in terms of elements in a ring.</p>
+</li>
+<li>
+<p>Etc.</p>
+</li>
+</ul>
+<p>The direct limit always come with its <strong>canonical arrows</strong>, or canonical morphisms, which are the projections @\phi_j : A_j \to \underset{\rightarrow}{\operatorname{lim}} A_i@ sending an element to its equivalence class. In fact, the algebraic operations are defined on @\underset{\rightarrow}{\operatorname{lim}} A_i@ to be the &ldquo;free-est&rdquo;, or less constrained, operations such that the canonical arrows are morphisms. Also, for any @j \leq k@, we have the commutativity condition @\phi_k \circ f_{jk} = \phi_j@. One can show that @\underset{\rightarrow}{\operatorname{lim}} A_i@ together with its canonical morphisms is in fact the colimit in @\operatorname{C}@ under the diagram of shape @I@ given by the data of a directed system @(A_i, f_{ij})@ as above. This means that for any object @X@ in @\operatorname{C}@, and any collection of morphisms @\{\psi_i : A_i \to X\}_{i \in I}@ such that @\psi_k \circ f_{jk} = \psi_j@ when @j \leq k@, there exists a unique morphism @\alpha : \underset{\rightarrow}{\operatorname{lim}} A_i \to X@ such that @\psi_i = \alpha \circ \phi_i@ for every @i \in I@. Also, the fact the direct limit is a colimit shows that it is unique up to a unique canonical isomorphism.</p>
+<p>By its construction, the direct limit is in some sense the &ldquo;smallest upper bound&rdquo;, the idea being that it&rsquo;s the smallest object (i.e. the one having the least amount of internal constraints) which approximates from above all of the @A_i@&rsquo;s. Category theory teaches us that we can learn about an object by studying its external relations.</p>
+<p>Now we get to the main point. If @(A_i, f_{ij})@ is a direct system over @I@, and if @J \subseteq I@ is cofinal in @I@, then we can &ldquo;restrict&rdquo; the direct system over @I@ to a direct system over @J@ by considering only objects @A_j@ and arrows @f_{jk}@ with @j,k \in J@. Now the fact we&rsquo;re trying to prove can be expressed as:</p>
+<blockquote>
+<p>Let @(A_i, f_{ij})@ be a direct system over @I@, and let @J \subseteq I@ be cofinal in @I@. Then
+</p>
+@@{\underset{\rightarrow}{\operatorname{lim}}}_I A_i = {\underset{\rightarrow}{\operatorname{lim}}}_J A_j,@@<p>
+where the equality symbol is to be interpreted, as usual, as &ldquo;isomorphic up to a unique isomorphism which makes a certain diagram commute&rdquo;, the diagram being the expected one with canonical morphisms @A_i \to \underset{\rightarrow}{\operatorname{lim}} A_i@.</p>
+</blockquote>
+<p>Let&rsquo;s prove this. We will construct a function @\theta@ between the two direct limits and show it is a bijection. Take any element @[x_j]@ in @{\underset{\rightarrow}{\operatorname{lim}}}_J A_j@. Then @\phi_{j}(x_j)@ is an element of @{\underset{\rightarrow}{\operatorname{lim}}}_I A_i@. This is what we define @\theta@ to be:
+</p>
+@@\theta([x_j]) = \phi_j(x_j).@@<p>
+This is a well-defined function. Indeed, suppose @[x_{j_1}] = [x_{j_2}]@. Then there exists some @k \in J@ which is an upper bound of both @j_1@ and @j_2@, such that @f_{j_1,k}(x_{j_1}) = f_{j_2,k}(x_{j_2})@. Now, the commutativity condition of the canonical morphisms tells us that
+</p>
+@@\phi_{j_1}(x_{j_1}) = \phi_k(f_{j_1,k}(x_{j_1})) = \phi_k(f_{j_2,k}(x_{j_2})) = \phi_{j_2}(x_{j_2}),@@<p>
+so @\theta@ is well-defined as claimed. Moreover, if the objects are groups, rings, anything with algebraic structure, then we see that @\theta@ respects this structure, since it&rsquo;s defined in terms of the canonical morphisms. Now suppose @\theta([x_{j_1}]) = \theta([x_{j_2}])@. Then @\phi_{j_1}(x_{j_1}) = \phi_{j_2}(x_{j_2})@ in @{\underset{\rightarrow}{\operatorname{lim}}}_I A_i@, so there exists @k \in I@ some upper bound of both @j_1@ and @j_2@ such that @f_{j_1,k}(x_{j_1}) = f_{j_2,k}(x_{j_2})@. Because @J@ is cofinal in @I@, we can actually suppose @k \in J@. Then this implies @[x_{j_1}] = [x_{j_2}]@ in the direct limit over @J@, so @\theta@ is injective. To show it is surjective, pick any element @[x_i]@ in @{\underset{\rightarrow}{\operatorname{lim}}}_I A_i@. Again, because @J@ is cofinal in @I@, there exists some @j \in J@ with @i \leq j@. Of course, @[x_i] = [f_{ij}(x_i)]@, so @\theta([f_{ij}(x_i)]) = [x_i]@ and @\theta@ is surjective.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/2026-03-03-hard-clojure/" class="button inline prev">
+        &lt; [<span class="button__text">Closing in closure in Clojure</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/2025-02-22-skyscraper-sheaves/" class="button inline next">
+         [<span class="button__text">Skyscraper sheaves</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+<div id="wcb" class="carbonbadge wcb-d"></div>
+<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+
+  
+</div>
+
+</body>
+</html>

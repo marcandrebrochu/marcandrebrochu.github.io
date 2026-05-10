@@ -1,0 +1,110 @@
+<?xml version="1.0" encoding="utf-8" standalone="yes"?>
+<rss version="2.0" xmlns:atom="http://www.w3.org/2005/Atom">
+  <channel>
+    <title>Posts on Marc-André Brochu&#39;s Oueb Site</title>
+    <link>//localhost:1313/posts/</link>
+    <description>Recent content in Posts on Marc-André Brochu&#39;s Oueb Site</description>
+    <generator>Hugo</generator>
+    <language>en-ca</language>
+    <lastBuildDate>Wed, 18 Mar 2026 00:00:00 +0000</lastBuildDate>
+    <atom:link href="//localhost:1313/posts/index.xml" rel="self" type="application/rss+xml" />
+    <item>
+      <title>Compter des composantes irréductibles est comme compter des points</title>
+      <link>//localhost:1313/posts/2026-03-18-irred-comme-points/</link>
+      <pubDate>Wed, 18 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2026-03-18-irred-comme-points/</guid>
+      <description>&lt;p&gt;Pour des ensembles de cardinalité finie, on a le principe d&amp;rsquo;inclusion-exclusion:&#xA;&lt;/p&gt;&#xA;@@&#xD;&#xA;  |A \cup B| = |A| + |B| - |A \cap B|.&#xD;&#xA;@@&lt;p&gt;En comparaison, si @X@ et @Y@ sont deux parties fermées d&amp;rsquo;un espace topologique ayant chacune un nombre fini de composantes irréductibles&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;, et qu&amp;rsquo;on note @n(-)@ le nombre de composantes irréductibles, alors&#xA;&lt;/p&gt;&#xA;@@&#xD;&#xA;  n(X \cup Y) = n(X) + n(Y) - n(X \cap Y).&#xD;&#xA;@@&lt;p&gt;On déduit la première équation de celle-ci en donnant aux ensembles @A@ et @B@ la topologie discrète.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Passer du clavier CSA à Ergo-L</title>
+      <link>//localhost:1313/posts/2026-03-07-ergold/</link>
+      <pubDate>Sat, 07 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2026-03-07-ergold/</guid>
+      <description>&lt;p&gt;Jusqu&amp;rsquo;à maintenant, je me suis presque&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt; toujours servi de la &lt;a href=&#34;https://en.wikipedia.org/wiki/CSA_keyboard&#34;&gt;disposition canadienne multilingue standard&lt;/a&gt;.&#xA;Elle permet d&amp;rsquo;écrire en anglais et en français sans trop de mal.&#xA;Un objectif principal de cette disposition est de minimiser les touches mortes.&#xA;Par exemple, on peut entrer les caractères &amp;ldquo;à&amp;rdquo;, &amp;ldquo;ç&amp;rdquo; et &amp;ldquo;è&amp;rdquo; directement, ce qui est assez pratique.&#xA;Cependant! Mes doigts partent en incartade quand je leur demande une paire de crochets ou des accolades.&#xA;Ma main fait des frasques si j&amp;rsquo;ai le malheur de lui quémander un diacritique tout nu.&#xA;Je fige si je dois fermer une balise HTML ou ouvrir une commande TeX.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Closing in closure in Clojure</title>
+      <link>//localhost:1313/posts/2026-03-03-hard-clojure/</link>
+      <pubDate>Tue, 03 Mar 2026 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2026-03-03-hard-clojure/</guid>
+      <description>&lt;p&gt;Learning Clojure is a lot of fun. For one, the community is great.&lt;sup id=&#34;fnref:1&#34;&gt;&lt;a href=&#34;#fn:1&#34; class=&#34;footnote-ref&#34; role=&#34;doc-noteref&#34;&gt;1&lt;/a&gt;&lt;/sup&gt;&#xA;On top of that, there&amp;rsquo;s many exercises available; that&amp;rsquo;s excellent for people like me, who learn by doing.&#xA;For instance, &lt;a href=&#34;https://github.com/PEZ/rich4clojure&#34;&gt;rich4clojure&lt;/a&gt; is a great resource.&#xA;It works out-of-the-box with Visual Studio Code, which is nice when you just want to start working&#xA;on problems asap and you&amp;rsquo;ll just &amp;ldquo;setup the tools later&amp;rdquo;.&lt;/p&gt;&#xA;&lt;p&gt;Tonight, I&amp;rsquo;m solving &lt;a href=&#34;https://github.com/PEZ/rich4clojure/blob/main/src/rich4clojure/hard/problem_084.clj&#34;&gt;problem 84&lt;/a&gt; from that set.&#xA;I thought, maybe you&amp;rsquo;d like to follow along with me. Here it goes:&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Direct limits, and how to compute them from cofinal subsets</title>
+      <link>//localhost:1313/posts/2025-02-22-direct-limits/</link>
+      <pubDate>Sat, 22 Feb 2025 00:00:01 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-22-direct-limits/</guid>
+      <description>&lt;p&gt;&lt;a href=&#34;//localhost:1313/posts/2025-02-22-skyscraper-sheaves/&#34;&gt;Here&lt;/a&gt; I talked about computing a direct limit on some cofinal subset. In this post, I want to prove what my assertions.&lt;/p&gt;&#xA;&lt;p&gt;Note that direct limits are a special case of colimits, and what I&amp;rsquo;ll talk about can easily be generalized. In particular, colimit may also be computed on cofinal subcategories of their indexing category, and yield equal (&amp;ldquo;isomorphic up to a unique canonical isomorphism&amp;rdquo;) colimits. However, in this post I&amp;rsquo;ll stay in the particular case of direct limits, and I&amp;rsquo;ll try to define things first in terms of elements, to stay as concrete as possible.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Skyscraper sheaves</title>
+      <link>//localhost:1313/posts/2025-02-22-skyscraper-sheaves/</link>
+      <pubDate>Sat, 22 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-22-skyscraper-sheaves/</guid>
+      <description>&lt;p&gt;Let @X@ be a topological space, let @p@ be a point of @X@, and let @S@ be any set. In the notation of Vakil, define the &lt;strong&gt;skyscraper sheaf&lt;/strong&gt; supported at @p@ by the formula&#xA;&lt;/p&gt;&#xA;@@&#xD;&#xA;(i_{p,*}S)(U) =&#xD;&#xA;\begin{cases}&#xD;&#xA;S &amp; \text{if $p \in U$;} \\&#xD;&#xA;1 &amp; \text{otherwise.}&#xD;&#xA;\end{cases}&#xD;&#xA;@@&lt;p&gt;&#xA;Here @1@ is the singleton set. We can also define such a sheaf in other categories (abelian groups, rings, etc.), replacing the singleton set by the appropriate terminal object.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Characteristic classes (Part 1, Cohomology)</title>
+      <link>//localhost:1313/posts/2025-02-13-characteristic-classes-pt1/</link>
+      <pubDate>Thu, 13 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-13-characteristic-classes-pt1/</guid>
+      <description>&lt;p&gt;&lt;em&gt;TODO: I need to fix the commutative diagrams in this post because they just don&amp;rsquo;t show up right now.&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;I&amp;rsquo;m planning on writing a series of posts that explore the theory and applications of characteristic classes in algebraic topology, following the book from Milnor and Stasheff. Here I start with the appendix A, where homology is discussed and basic theorems are laid out. This post will also serve me well as a quick reminder, since I keep forgetting small details and ideas regarding (singular) (co)homology. Many results and explanations can be found in Hatcher&amp;rsquo;s book.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The dominance order on partitions</title>
+      <link>//localhost:1313/posts/2025-02-08-dominance-order/</link>
+      <pubDate>Sat, 08 Feb 2025 00:00:01 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-08-dominance-order/</guid>
+      <description>&lt;p&gt;&lt;em&gt;TODO: Fix Young diagrams as they just don&amp;rsquo;t show up right now!&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;Recall that a &lt;em&gt;partition&lt;/em&gt; @\lambda@ of some fixed natural number @n \geq 0@ is a list of nonnegative integers @(\lambda_1,\lambda_2,\dots)@ such that @\lambda_1 \geq \lambda_2 \geq \dots \geq 0@ and such that @\lambda_1+\lambda_2+\dots = n@. For the purposes of this post, the actual number of parts in a partition is irrelevant, and since one can always extend a partition with zeroes we may suppose that all partitions have the same fixed number of parts, let&amp;rsquo;s say @\ell@.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A description for the ideal generated by the symmetric polynomials in two variables</title>
+      <link>//localhost:1313/posts/2025-02-08-simpler-desc-symm-poly/</link>
+      <pubDate>Sat, 08 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-08-simpler-desc-symm-poly/</guid>
+      <description>&lt;p&gt;The goal of this short post is to convince myself that the ideal generated by @\operatorname{Sym}^+@ inside of @\mathbb{C}[x,y]@ can be more simply described as the ideal generated by @xy@ and @x+y@, i.e.&#xA;&lt;/p&gt;&#xA;@@\langle \operatorname{Sym}^+\rangle = \langle xy,x+y\rangle.@@&lt;p&gt;As a shorthand, set @A = \mathbb{C}[x,y]@. The ring @A@ is graded:&#xA;&lt;/p&gt;&#xA;@@A = \bigoplus_{d = 0}^\infty A^{(d)},@@&lt;p&gt;&#xA;where @A^{(d)}@ is the @\mathbb{C}@-module consisting of the homogeneous polynomials of degree @d@:&#xA;&lt;/p&gt;&#xA;@@A^{(d)} = \mathbb{C}\{x^ay^b \mid a + b = d\}.@@&lt;p&gt;In general, a polynomial is said to be &lt;em&gt;symmetric&lt;/em&gt; when it is invariant under any permutation of the variables. In our case, a polynomial @p(x,y) \in A@ is symmetric when @p(x,y) = p(y,x)@. For instance, @x^3 + y^3 + 2xy@ is symmetric while @x+y^2@ is not. The product and difference of two symmetric polynomials is also a symmetric polynomial. Also, @1@ is a trivial example of a symmetric polynomial. Hence the set of all symmetric polynomials is a subring of @A@, which we denote by @\operatorname{Sym}@. This subring is naturally graded:&#xA;&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Galois connections</title>
+      <link>//localhost:1313/posts/2025-02-06-galois-connections/</link>
+      <pubDate>Thu, 06 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-06-galois-connections/</guid>
+      <description>&lt;p&gt;Let @X@ and @Y@ be two partially ordered sets (posets). Two functions @f : X \to Y@ and @g : Y \to X@ are said to form a &lt;em&gt;Galois connection&lt;/em&gt; when the following is true for all @a \in X@ and all @b \in Y@:&#xA;\begin{equation*}f(a) \leq b \iff a \leq g(b).\tag{C}\end{equation*}&#xA;We say that @f@ is the lower (or left) adjoint, and @g@ is the upper (or right) adjoint. Oftentimes the lower adjoint is marked with a lower-star @f_*@ and the upper adjoint with an upper-star @f^*@. We will see for instance that the direct and inverse image form such a connection, and this hopefully explains the usual notation for these concepts. The shorthand I&amp;rsquo;m going to use for saying two functions are in Galois connection is @f_* \dashv f^*@.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>The determinant of a matrix is just the product of its columns</title>
+      <link>//localhost:1313/posts/2025-02-05-making-determinants-my-friends/</link>
+      <pubDate>Wed, 05 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-05-making-determinants-my-friends/</guid>
+      <description>&lt;p&gt;A fact I&amp;rsquo;ve known for a very long time, but never bothered to prove for myself, is the unicity of the determinant for square matrices. More precisely, let @A@ be any commutative ring with identity; then the determinant is the only @A@-valued function on matrices that: (i) is linear on each column, (ii) is such that switching two columns changes the sign, and (iii) sends the identity matrix to 1.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Filters are generalized subsets</title>
+      <link>//localhost:1313/posts/2025-02-03-filters/</link>
+      <pubDate>Mon, 03 Feb 2025 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2025-02-03-filters/</guid>
+      <description>&lt;p&gt;&lt;strong&gt;TODO&lt;/strong&gt; Add small proofs of known facts about limits using the language of filters.&lt;/p&gt;&#xA;&lt;p&gt;Given any set @X@, a &lt;em&gt;filter&lt;/em&gt; on @X@ is a collection of subsets @\mathcal{F} \subseteq 2^X@ such that:&lt;/p&gt;&#xA;&lt;ol&gt;&#xA;&lt;li&gt;@X@ itself is in @\mathcal{F}@;&lt;/li&gt;&#xA;&lt;li&gt;if @A \in \mathcal{F}@ and @B \in \mathcal{F}@, then @A \cap B \in \mathcal{F}@;&lt;/li&gt;&#xA;&lt;li&gt;if @A \in \mathcal{F}@ and @C@ is any subset with @A \subseteq C@, then @C \in \mathcal{F}@ (this is refered to by the expression &lt;em&gt;upward closure&lt;/em&gt;).&lt;/li&gt;&#xA;&lt;/ol&gt;&#xA;&lt;p&gt;There are always at least two (possibly identical) filters on any set @X@: one is @\top = \{X\}@ and the other is @\bot = 2^X@. Note that @\bot@ is the only filter which contains the empty set, because of the upward closure property. We can put a partial order on @\operatorname{Filter}(X)@, the set of filters on @X@, by declaring @\mathcal{F} \leq \mathcal{G}@ if and only if @\mathcal{G} \subseteq \mathcal{F}@. At first glance, it may seem weird to &amp;ldquo;reverse&amp;rdquo; the order, but it makes sense if you think of a filter as a way of approximating something, or as some kind of locating scheme. The usual intersection and union of sets makes @\text{Filter}(X)@ into a complete lattice, i.e. any collection of filters has a least upper bound.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>Le radical est l&#39;intersection des idéaux maximaux</title>
+      <link>//localhost:1313/posts/2023-04-11-radical-intersection/</link>
+      <pubDate>Tue, 11 Apr 2023 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2023-04-11-radical-intersection/</guid>
+      <description>&lt;p&gt;L&amp;rsquo;exercice 1.1 d&amp;rsquo;Ottem et Ellingsrud demande:&lt;/p&gt;&#xA;&lt;blockquote&gt;&#xA;&lt;p&gt;In any ring the radical of an ideal @\mathfrak{a}@ equals the intersection of the prime ideals containing the ideal. Show, using the Nullstellensatz, that in the polynomial ring @k[x_1,\dots,x_n]@ the radical @\sqrt{\mathfrak{a}}@ equals the intersection of all the &lt;em&gt;maximal&lt;/em&gt; ideals containing @\mathfrak{a}@.&lt;/p&gt;&#xA;&lt;/blockquote&gt;&#xA;&lt;p&gt;Tout d&amp;rsquo;abord, je souhaite me rafraîchir la mémoire et redémontrer la première assertion qu&amp;rsquo;ils font, c&amp;rsquo;est-à-dire que le radical d&amp;rsquo;un idéal est en fait l&amp;rsquo;intersection de tous les idéaux premiers qui le contiennent. Je trouve que c&amp;rsquo;est une caractérisation intéressante du radical. Peut-être même que je vais créer un autre article spécifiquement pour ça ! La preuve n&amp;rsquo;est pas triviale, en tout cas pour l&amp;rsquo;une des deux inclusions.&#xA;La première inclusion est facile à voir: soit @\{\mathfrak{p}_i\}_{i\in I}@ la collection de tous les idéaux premiers qui contiennent @\mathfrak{a}@. Vu que pour tout idéal premier @x^n \in \mathfrak{p_i}@ implique que @x\in\mathfrak{p_i}@ (pour un certain entier @n\geq 1@), il est clair que @\sqrt{\mathfrak{a}}\subseteq \bigcap_{i\in I}\mathfrak{p_i}@.&#xA;C&amp;rsquo;est la seconde inclusion qui pose problème. Je vais la montrer par contrapositive: soit @x\notin \sqrt{\mathfrak{a}}@. Je considère la collection @\mathcal{I}@ des idéaux @\mathfrak{b}\supseteq \mathfrak{a}@ tels que @x^n\notin\mathfrak{b}@ pour tout entier @n\geq 1@.&#xA;Si j&amp;rsquo;ordonne partiellement cette collection par l&amp;rsquo;inclusion, le lemme de Zorn me donne l&amp;rsquo;existence d&amp;rsquo;un élément maximal @\mathfrak{p}\in\mathcal{I}@. Je veux montrer que @\mathfrak{p}@ est premier. Soit @a@ et @b@ deux éléments de l&amp;rsquo;anneau tels que @a,b\notin \mathfrak{p}@. Par maximalité, ni @\mathfrak{p}+(a)@ ni @\mathfrak{p}+(b)@ ne font partie de la collection @\mathcal{I}@. Par exemple, comme @a\notin \mathfrak{p}@, l&amp;rsquo;idéal @\mathfrak{p}+(a)@ (i.e. le plus petit idéal qui contient à la fois @\mathfrak{p}@ et @(a)@) contient strictement @\mathfrak{p}@. Donc il existe deux entiers @n@ et @m@ tels que @x^n\in \mathfrak{p}+(a)@ et @x^m\in\mathfrak{p}+(b)@. Puisque l&amp;rsquo;idéal @\mathfrak{p}+(ab)@ contient @x^{n+m}@, il n&amp;rsquo;est lui non plus pas contenu dans @\mathcal{I}@. En particulier @ab\notin\mathfrak{p}@ car sinon ajouter @(ab)@ à @\mathfrak{p}@ n&amp;rsquo;aurait rien changé, ce qui n&amp;rsquo;est pas le cas. Cela prouve que @\mathfrak{p}@ est premier. Mais alors @\bigcap_{i\in I}\mathfrak{p}_i\subseteq \mathfrak{p}@ et puisque @x\notin \mathfrak{p}@ par construction, je retrouve bien que @x\notin\bigcap_{i\in I}\mathfrak{p_i}@, ce qu&amp;rsquo;il fallait démontrer.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>L&#39;existence et l&#39;unicité de l&#39;expansion en série de Laurent</title>
+      <link>//localhost:1313/posts/2023-02-17-serie-de-laurent/</link>
+      <pubDate>Fri, 17 Feb 2023 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2023-02-17-serie-de-laurent/</guid>
+      <description>&lt;p&gt;&lt;em&gt;TODO: really rough article, clean it up!&lt;/em&gt;&lt;/p&gt;&#xA;&lt;p&gt;Soit @\Omega@ un domaine et @f:\Omega\to\mathbb{C}@ une fonction holomorphe.&lt;/p&gt;&#xA;&lt;p&gt;Je prend un @z\in A@&lt;/p&gt;&#xA;&lt;p&gt;@\gamma_1(t) = r_1e^{-it}@ et @\gamma_2(t) = r_2e^{it}@.&lt;/p&gt;&#xA;&lt;p&gt;(TODO: expliquer) Par la formule intégrale de Cauchy on a que&#xA;\begin{equation}&#xA;f(z) = \frac{1}{2\pi i}\left(\oint_{\gamma_1} \frac{f(w)}{w-z}dz + \oint_{\gamma_2} \frac{f(w)}{w-z}dz\right)&#xA;\end{equation}&lt;/p&gt;&#xA;&lt;h1 id=&#34;existence-de-lexpansion&#34;&gt;Existence de l&amp;rsquo;expansion&lt;/h1&gt;&#xA;&lt;h2 id=&#34;développement-de-la-partie-principale&#34;&gt;Développement de la partie principale&lt;/h2&gt;&#xA;&lt;p&gt;Lorsque @w@ est sur le chemin @\gamma_1@, on a que&#xA;&lt;/p&gt;&#xA;@@&#xD;&#xA;\begin{align}&#xD;&#xA;\frac{1}{w-z} &amp;= \frac{1}{(w-a)-(z-a)} = \frac{1}{w-a}\cdot\frac{1}{1-\frac{z-a}{w-a}}\\&#xD;&#xA;&amp;= \frac{1}{w-a}\frac{-(w-a)}{z-a}\sum_{n=0}^{\infty}\left(\frac{w-a}{z-a}\right)^n\\&#xD;&#xA;&amp;= \frac{-1}{w-a}\sum_{n=1}^\infty \left(\frac{w-a}{z-a}\right)^n&#xD;&#xA;\end{align}&#xD;&#xA;@@&lt;p&gt;&#xA;puisque @|\frac{z-a}{w-a}|&gt;1@ il faut utiliser l&amp;rsquo;autre formule pour une série géométrique.&lt;/p&gt;</description>
+    </item>
+    <item>
+      <title>A perfect number theory proof</title>
+      <link>//localhost:1313/posts/2021-10-08-a-perfect-number-theory-proof/</link>
+      <pubDate>Fri, 08 Oct 2021 00:00:00 +0000</pubDate>
+      <guid>//localhost:1313/posts/2021-10-08-a-perfect-number-theory-proof/</guid>
+      <description>&lt;p&gt;For my first article on this blog (or any blog for that matter), I want to present one of my favorite proofs of elementary number theory. It&amp;rsquo;s based around the concept of a &lt;em&gt;perfect number&lt;/em&gt;. You know that a concept named like that ought to be interesting. A perfect number is any positive integer that is equal to the sum of its positive divisors, except the fact that you don&amp;rsquo;t count the number itself in that sum. You only sum its &lt;em&gt;proper&lt;/em&gt; divisors. The whole is equal to the sum of its parts; that&amp;rsquo;s why such a number is &lt;em&gt;perfect&lt;/em&gt;. For instance, six is a perfect number because its proper divisors are 1, 2 and 3; if you sum these up you get back six. In fact six is the smallest perfect number. The next one is 28 as its proper divisors are 1, 2, 4, 7 and 14.&lt;/p&gt;</description>
+    </item>
+  </channel>
+</rss>

@@ -1,0 +1,305 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>The dominance order on partitions :: Marc-André Brochu&#39;s Oueb Site</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TODO: Fix Young diagrams as they just don&rsquo;t show up right now!
+Recall that a partition @\lambda@ of some fixed natural number @n \geq 0@ is a list of nonnegative integers @(\lambda_1,\lambda_2,\dots)@ such that @\lambda_1 \geq \lambda_2 \geq \dots \geq 0@ and such that @\lambda_1&#43;\lambda_2&#43;\dots = n@. For the purposes of this post, the actual number of parts in a partition is irrelevant, and since one can always extend a partition with zeroes we may suppose that all partitions have the same fixed number of parts, let&rsquo;s say @\ell@.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/2025-02-08-dominance-order/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a2cc694a9b481f15d41722bffc2cc54eea4c4f74fd9072b0b33253604c22606e.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="The dominance order on partitions">
+<meta property="og:description" content="TODO: Fix Young diagrams as they just don&rsquo;t show up right now!
+Recall that a partition @\lambda@ of some fixed natural number @n \geq 0@ is a list of nonnegative integers @(\lambda_1,\lambda_2,\dots)@ such that @\lambda_1 \geq \lambda_2 \geq \dots \geq 0@ and such that @\lambda_1&#43;\lambda_2&#43;\dots = n@. For the purposes of this post, the actual number of parts in a partition is irrelevant, and since one can always extend a partition with zeroes we may suppose that all partitions have the same fixed number of parts, let&rsquo;s say @\ell@.
+" />
+<meta property="og:url" content="//localhost:1313/posts/2025-02-08-dominance-order/" />
+<meta property="og:site_name" content="Marc-André Brochu&#39;s Oueb Site" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-02-08 00:00:01 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['@@', '@@']],
+      inlineMath: [['@', '@']],
+    },
+    loader: {
+      load: ['ui/safe'],
+    },
+  };
+</script>
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Marc-André Brochu&#39;s Oueb Site
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://github.com/marcandrebrochu">GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu">YouTube</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://github.com/marcandrebrochu" >GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu" >YouTube</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/2025-02-08-dominance-order/">The dominance order on partitions</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-02-08</time></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p><em>TODO: Fix Young diagrams as they just don&rsquo;t show up right now!</em></p>
+<p>Recall that a <em>partition</em> @\lambda@ of some fixed natural number @n \geq 0@ is a list of nonnegative integers @(\lambda_1,\lambda_2,\dots)@ such that @\lambda_1 \geq \lambda_2 \geq \dots \geq 0@ and such that @\lambda_1+\lambda_2+\dots = n@. For the purposes of this post, the actual number of parts in a partition is irrelevant, and since one can always extend a partition with zeroes we may suppose that all partitions have the same fixed number of parts, let&rsquo;s say @\ell@.</p>
+<p>We put a relation on the set of all partitions of @n@ by declaring @\lambda \preceq \mu@ if and only if @\lambda_1 \leq \mu_1@, @\lambda_1 + \lambda_2 \leq \mu_1 + \mu_2@, and so on. In other words, for every integer @k@ ranging from @1@ to @\ell@, the sum of the first @k@ parts of @\lambda@ must not be greater than the sum of the first @k@ parts of @\mu@. Let&rsquo;s prove that this is a partial order: it must be reflexive, transitive and antisymmetric.</p>
+<ul>
+<li>Reflexive: this one&rsquo;s pretty easy.</li>
+<li>Transitive: also easy. Suppose @\lambda \preceq \mu@ and @\mu \preceq \nu@. That means for each @k \in \{1,2,\dots, \ell\}@, we have @\sum_{i=1}^k \lambda_i \leq \sum_{i=1}^k \mu_i@ and @\sum_{i=1}^k \lambda_i \leq \sum_{i=1}^k \nu_i@. We conclude by transitivity of the usual order @\leq@.</li>
+<li>Antisymmetric: suppose @\lambda \preceq \mu@ and @\mu \preceq \lambda@. The definition of @\preceq@ says that, in particular at @k=1@, we have @\lambda_1 \leq \mu_1@ and @\mu_1 \leq \lambda_1@, whence @\lambda_1 = \mu_1@ from the antisymmetry of @\leq@. Then at @k=2@ we have @\lambda_1 + \lambda_2 \leq \mu_1 + \mu_2@ and @\mu_1 + \mu_2 \leq \lambda_1 + \lambda_2@, whence @\lambda_2 = \mu_2@ by antisymmetry of @\leq@ and substitution. We can continue in this way (a more rigorous approach would be a proof by induction but I don&rsquo;t care enough to do it).</li>
+</ul>
+<p>This order @\preceq@ on the set of partitions of @n@ is called the <em>dominance order</em> (French: <em>ordre de dominance</em>). When @n \geq 6@, this order has incomparable elements; in fact it&rsquo;s a linear order if and only if @n \leq 5@. For instance, temporarily suppose @n=6@ and pick @\lambda = (3,1,1,1)@ and @\mu = (2,2,2)@. Since @3 \not\leq 2@ we immediately find @\lambda \not\preceq \mu@. On the other hand, @2+2+2@ fails to be smaller than @3+1+1@, so @\mu \not\preceq \lambda@. Hence these two elements are incomparable in this order.</p>
+<p>Recall that any partition @\lambda@ represents a Young diagram. For instance, @(3,2,2,1,1,1)@ is a partition of @10@ that may be drawn as</p>
+<!-- raw HTML omitted -->
+<p>The <em>conjugate</em> of a partition @\lambda@, written @\lambda^*@, is another partition of @n@ obtained by flipping the Young diagram about its antidiagonal. For our previous example, that would be</p>
+<!-- raw HTML omitted -->
+<p>written textually as @(6,3,1)@.</p>
+<p><strong>TODO</strong> Show that conjugation is an antiautomorphism.</p>
+<h2 id="a-new-way-of-seeing-things">A new way of seeing things<a href="#a-new-way-of-seeing-things" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>All these sums are annoying sometimes, so here&rsquo;s an alternative way to see this construction. To any partition @\lambda@ we associate the list @\Sigma \lambda@ defined as
+</p>
+@@\Sigma\lambda = (0,\lambda_1,\lambda_1+\lambda_2,\lambda_1+\lambda_2+\lambda_3,\dots).@@<p>
+We call this list the <em>associated list</em>. It has length @\ell+1@ and is always (weakly) increasing. Moreover, the last term in the list is always @n@ and the first is always @0@. Finally, the associated list is <em>concave</em>: for any @i \in \{2,3,\dots,\ell\}@, we have
+</p>
+@@2(\Sigma\lambda)_i \geq (\Sigma\lambda)_{i-1} + (\Sigma\lambda)_{i+1}.@@<p>
+This fact can be proven by noticing @2\lambda_i \geq \lambda_{i}+\lambda_{i+1}@ (easy to see or prove by induction); then
+\begin{align*}
+(\Sigma\lambda)<em>{i-1}+(\Sigma\lambda)</em>{i+1} &amp;= 2(\Sigma\lambda)<em>{i-1}+\lambda_i+\lambda</em>{i+1}\
+&amp;\leq 2(\Sigma\lambda)_{i-1}+2\lambda_i\
+&amp;= 2(\Sigma\lambda)_i.
+\end{align*}</p>
+<p>Having any list @f@ of @\ell+1@ elements with the above three properties (starts with @0@ and ends with @n@, weakly increasing, concave), we can produce another list having @\ell@ elements using the difference operator @\Delta@ defined as
+</p>
+@@\Delta f = (f_2-f_1, f_3-f_2, \dots).@@<p>
+Because of concavity, the list @\Delta f@ is weakly decreasing:
+</p>
+@@f_i - f_{i-1} - (f_{i+1} - f_i) = 2 f_i - f_{i-1} - f_{i+1} \geq 0.@@<p>
+Also, the list @\Delta f@ only contains nonnegative integers since @f@ is weakly increasing. Finally, the sum of all elements in @\Delta f@ is precisely @n@ because the sum telescopes to be @f_\ell-f_1@, which is @n-0@ by the first property. In other words, @\Delta f@ is actually a partition of @n@. It&rsquo;s not hard to show the operators @\Sigma@ and @\Delta@ are mutual inverses:</p>
+<blockquote>
+<p>The associated list operator @\Sigma@ furnishes a bijection between the partitions of @n@ and the lists of @\ell+1@ integers which: (i) start with @0@ and end with @n@; (ii) are weakly increasing; and (iii) are concave. The inverse of @\Sigma@ is the difference operator @\Delta@.</p>
+</blockquote>
+<p>Back to order. From the definition of @\Sigma@, we see that @\lambda \preceq \mu@ if and only if @\Sigma\lambda \leq \Sigma\mu@, with the obvious partial order that compares lists &ldquo;element by element&rdquo;. Therefore @\Sigma@ is an order isomorphism.</p>
+<p>Write @A@ for that set of lists which are concave, etc., with which the set of partitions of @n@ is in bijection. For any two @f,g \in A@, set @h@ to be the list defined by: @h_i@ is the minimum between @f_i@ and @g_i@. This list is still weakly increasing, its first element is still @0@ and its last element is still @n@. Moreover, @h_i@ is also concave, so @h \in A@. Because the order on @A@ is comparision element by element, this @h@ is actually the minimum (in the order theory sense) of @f@ and @g@: we can write @f \wedge g = h@. Because @\Sigma@ is an order isomorphism, this gives us a formula for the infimum of two partitions of @n@ in the order @\preceq@:
+</p>
+@@\lambda \wedge \mu = \Delta(\Sigma \lambda \wedge \Sigma \mu).@@<p>
+For instance, take @(3,1,1,1)@ and @(2,2,2)@. Recall that these elements are not comparable. We have @\Sigma(3,1,1,1) = (0,3,4,5,6)@ and @\Sigma(2,2,2) = (0,2,4,6)@. Now we compute the minimum in @A@ by taking the minimum componentwise: it&rsquo;s @(0,2,4,5,6)@. Using the difference operator @\Delta@ to move back into partitions of @n@, we obtain
+</p>
+@@(3,1,1,1) \wedge (2,2,2) = (2,2,1,1).@@<p>We don&rsquo;t have such an easy time applying the same idea to get a supremum, because the maximum componentwise of two lists in @A@ is not necessarily another list in @A@. Indeed, it may not be concave: take for instance the componentwise maximum of @(0,3,4,5,6)@ and @(0,2,4,6,6)@, which is @(0,3,4,6,6)@, and that&rsquo;s not concave at @4@. However we can use the fact that the conjugation is an antiautomorphism, that is, an order isomorphism which reverses the order. Anytime we have something like that, the supremum corresponds to the infimum in the image by the antiautomorphism, so we can set:
+</p>
+@@\lambda \vee \mu = (\lambda^* \wedge \mu^*)^*.@@<p>As an example, let&rsquo;s compute the supremum of @(3,1,1,1)@ and @(2,2,2)@. We start by computing their conjugates: @(3,1,1,1)^* = (4,1,1)@ and @(2,2,2)^* = (3,3)@. Now to find the infimum of the conjugates, we move into @A@ using the @\Sigma@ operator: @\Sigma(4,1,1) = (0,4,5,6)@ and @\Sigma(3,3) = (0,3,6,6)@. As discussed before, their minimum in @A@ is given by the componentwise minimum, which is @(0,3,5,6)@. We move back into partitions of @n@ using the difference operator, which gives us @(3,2,1)@. Finally we should take the conjugate of this, but in this particular case @(3,2,1)@ is autodual. Hence
+</p>
+@@(3,1,1,1)\vee (2,2,2) = (3,2,1).@@<p>This shows that the set of partitions of @n@ is not only a partial order, but also a lattice, under the dominance order @\preceq@.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/2025-02-13-characteristic-classes-pt1/" class="button inline prev">
+        &lt; [<span class="button__text">Characteristic classes (Part 1, Cohomology)</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/2025-02-08-simpler-desc-symm-poly/" class="button inline next">
+         [<span class="button__text">A description for the ideal generated by the symmetric polynomials in two variables</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+<div id="wcb" class="carbonbadge wcb-d"></div>
+<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+
+  
+</div>
+
+</body>
+</html>

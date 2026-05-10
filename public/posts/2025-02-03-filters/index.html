@@ -1,0 +1,299 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Filters are generalized subsets :: Marc-André Brochu&#39;s Oueb Site</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="TODO Add small proofs of known facts about limits using the language of filters.
+Given any set @X@, a filter on @X@ is a collection of subsets @\mathcal{F} \subseteq 2^X@ such that:
+@X@ itself is in @\mathcal{F}@; if @A \in \mathcal{F}@ and @B \in \mathcal{F}@, then @A \cap B \in \mathcal{F}@; if @A \in \mathcal{F}@ and @C@ is any subset with @A \subseteq C@, then @C \in \mathcal{F}@ (this is refered to by the expression upward closure). There are always at least two (possibly identical) filters on any set @X@: one is @\top = \{X\}@ and the other is @\bot = 2^X@. Note that @\bot@ is the only filter which contains the empty set, because of the upward closure property. We can put a partial order on @\operatorname{Filter}(X)@, the set of filters on @X@, by declaring @\mathcal{F} \leq \mathcal{G}@ if and only if @\mathcal{G} \subseteq \mathcal{F}@. At first glance, it may seem weird to &ldquo;reverse&rdquo; the order, but it makes sense if you think of a filter as a way of approximating something, or as some kind of locating scheme. The usual intersection and union of sets makes @\text{Filter}(X)@ into a complete lattice, i.e. any collection of filters has a least upper bound.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/2025-02-03-filters/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a2cc694a9b481f15d41722bffc2cc54eea4c4f74fd9072b0b33253604c22606e.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Filters are generalized subsets">
+<meta property="og:description" content="TODO Add small proofs of known facts about limits using the language of filters.
+Given any set @X@, a filter on @X@ is a collection of subsets @\mathcal{F} \subseteq 2^X@ such that:
+@X@ itself is in @\mathcal{F}@; if @A \in \mathcal{F}@ and @B \in \mathcal{F}@, then @A \cap B \in \mathcal{F}@; if @A \in \mathcal{F}@ and @C@ is any subset with @A \subseteq C@, then @C \in \mathcal{F}@ (this is refered to by the expression upward closure). There are always at least two (possibly identical) filters on any set @X@: one is @\top = \{X\}@ and the other is @\bot = 2^X@. Note that @\bot@ is the only filter which contains the empty set, because of the upward closure property. We can put a partial order on @\operatorname{Filter}(X)@, the set of filters on @X@, by declaring @\mathcal{F} \leq \mathcal{G}@ if and only if @\mathcal{G} \subseteq \mathcal{F}@. At first glance, it may seem weird to &ldquo;reverse&rdquo; the order, but it makes sense if you think of a filter as a way of approximating something, or as some kind of locating scheme. The usual intersection and union of sets makes @\text{Filter}(X)@ into a complete lattice, i.e. any collection of filters has a least upper bound.
+" />
+<meta property="og:url" content="//localhost:1313/posts/2025-02-03-filters/" />
+<meta property="og:site_name" content="Marc-André Brochu&#39;s Oueb Site" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2025-02-03 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['@@', '@@']],
+      inlineMath: [['@', '@']],
+    },
+    loader: {
+      load: ['ui/safe'],
+    },
+  };
+</script>
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Marc-André Brochu&#39;s Oueb Site
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://github.com/marcandrebrochu">GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu">YouTube</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://github.com/marcandrebrochu" >GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu" >YouTube</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/2025-02-03-filters/">Filters are generalized subsets</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2025-02-03</time></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p><strong>TODO</strong> Add small proofs of known facts about limits using the language of filters.</p>
+<p>Given any set @X@, a <em>filter</em> on @X@ is a collection of subsets @\mathcal{F} \subseteq 2^X@ such that:</p>
+<ol>
+<li>@X@ itself is in @\mathcal{F}@;</li>
+<li>if @A \in \mathcal{F}@ and @B \in \mathcal{F}@, then @A \cap B \in \mathcal{F}@;</li>
+<li>if @A \in \mathcal{F}@ and @C@ is any subset with @A \subseteq C@, then @C \in \mathcal{F}@ (this is refered to by the expression <em>upward closure</em>).</li>
+</ol>
+<p>There are always at least two (possibly identical) filters on any set @X@: one is @\top = \{X\}@ and the other is @\bot = 2^X@. Note that @\bot@ is the only filter which contains the empty set, because of the upward closure property. We can put a partial order on @\operatorname{Filter}(X)@, the set of filters on @X@, by declaring @\mathcal{F} \leq \mathcal{G}@ if and only if @\mathcal{G} \subseteq \mathcal{F}@. At first glance, it may seem weird to &ldquo;reverse&rdquo; the order, but it makes sense if you think of a filter as a way of approximating something, or as some kind of locating scheme. The usual intersection and union of sets makes @\text{Filter}(X)@ into a complete lattice, i.e. any collection of filters has a least upper bound.</p>
+<p>Any subset @A \subseteq X@ may be interpreted as a filter, the <em>principal filter</em> @\uparrow A@, defined as the collection of all subsets of @X@ which contain @A@. The word &ldquo;interpreted&rdquo; here is justified by the fact the function @\uparrow@ is actually an injection: suppose @A@ and @B@ are different subsets of @X@; without loss of generality, @B@ does not contain @A@; hence, by the very definition of the principal filter at @A@, the subset @B@ is not an element of @\uparrow A@, so the two filters @\uparrow A@ and @\uparrow B@ are different.</p>
+<p>So we have an injection (actually, a monotone map)
+</p>
+@@\uparrow\, : 2^X \hookrightarrow \text{Filter}(X).@@<p>
+However, many filters are <em>not</em> principal filters. These more complicated filters can be intuitively thought of as being &ldquo;generalized subsets&rdquo; of @X@, where we generalize by allowing them to have some kind of &ldquo;limiting&rdquo; or &ldquo;approximating&rdquo; behavior. Let&rsquo;s build a couple of examples to figure out what this means.</p>
+<ul>
+<li>
+<p>Take @X@ to be @\mathbb{N}@, the natural numbers. Consider the collection
+</p>
+@@\{ A \subseteq \mathbb{N} \mid \exists N \in \mathbb{N} : \forall n \geq N, n \in A \}.@@<p>
+This is an example of a filter on @\mathbb{N}@ which is not a principal filter (hint: what happens when you take the intersection of all elements in this filter? what happens when you do the same for a principal filter?) Intuitively speaking, if it were a subset, &ldquo;points&rdquo; in this filter should be &ldquo;numbers&rdquo; that are arbitrarily large.</p>
+</li>
+<li>
+<p>In any topological space @X@ with at least one point @p@, there&rsquo;s always the <em>neighborhood filter</em> @\mathcal{N}_p@, which is exactly the collection of all neighborhoods of @p@. Recall that a <em>neighborhood</em> of @p@ is a subset @Y \subseteq X@ having the property that its interior contains @p@. This is another example of a filter that is not principal (hint: if it were a principal filter, it would have to be @\uparrow \{p\}@, and in general @\{p\}@ is not an open set). When interpreted as a generalized subset of @X@, it could be described as the set of &ldquo;elements&rdquo; that are &ldquo;really close&rdquo; to @p@.</p>
+</li>
+</ul>
+<p>Now, if we wish to interpret filters as &ldquo;generalized subsets&rdquo;, we need some expanded concept of membership. Moreover, this expanded notion should stay compatible with the usual one (set membership) when we apply it to principal filters. Any point @x \in X@ can be seen as a set function @x : 1 \to X@ from the singleton set @1@ to @X@. Hence we declare that &ldquo;generalized points&rdquo; of @X@ are <em>all</em> functions @f : Y \to X@, where @Y@ is <em>any</em> set. Our new membership relation is the following: if @\mathcal{G}@ is a filter on @Y@ and @\mathcal{F}@ is a filter on @X@, we say that @f@ <em>tends to</em> @\mathcal{F}@ <em>along</em> @\mathcal{G}@ if and only if, for every @A \in \mathcal{F}@, we have @f^{-1}(A) \in \mathcal{G}@. The notation I just made up for this is
+</p>
+@@\lim_{\mathcal{G}} f = \mathcal{F}.@@<p>Given some function @f : X \to Y@ and a filter @\mathcal{F}@ on @X@, its <em>direct image</em> (denoted @f_*\mathcal{F}@) is a filter on @Y@ defined as the collection of subsets @B \subseteq Y@ having the property that @f^{-1}(B) \in \mathcal{F}@. Using this terminology, we may say that @f@ tends to @\mathcal{G}@ along @\mathcal{F}@ if and only if @f_*\mathcal{F} \leq \mathcal{G}@.</p>
+<p>There&rsquo;s also the <em>inverse image</em> @f^*\mathcal{G}@, which is a filter on @X@ defined as the collection of subsets @A \subseteq X@ such that there exists some @B \in \mathcal{G}@ with @f^{-1}(B) \subseteq A@. It&rsquo;s not too hard to show that this really is a filter, and as expected the direct and inverse image form a Galois connection. More precisely, for any set function @f : X \to Y@, any filter @\mathcal{F}@ on @X@ and any filter @\mathcal{G}@ on @Y@, we have
+</p>
+@@f_*\mathcal{F} \leq \mathcal{G} \iff \mathcal{F} \leq f^*\mathcal{G}.@@<p>As a consequence, we have the usual relations @\mathcal{F} \leq f^*f_*\mathcal{F}@ and @f_*f^*\mathcal{G} \leq \mathcal{G}@. Many nice things can be said about filters using this connection, direct images, and inverse images. Here are some examples:</p>
+<ul>
+<li>
+<p>Let @i : A \hookrightarrow X@ be the inclusion map from a subset @A \subseteq X@. Then one can check @i_*(\top)@ is exactly @\uparrow A@, the principal filter at @A@.</p>
+</li>
+<li>
+<p>For any function @f : X \to Y@ and @\mathcal{F}@ filter on @X@, we have @f_*\mathcal{F} = \bot@ if and only if @\mathcal{F} = \bot@. Indeed, suppose @F = \bot@; then by the Galois connection it&rsquo;s always true that @f_*\mathcal{F} \leq \mathcal{G}@ for any filter @\mathcal{G}@ on @Y@, so in particular @f_*\mathcal{F} = \bot@. On the other hand, suppose @f_*\mathcal{F} = \bot@; by definition this means all subsets of @Y@ have their preimage a member of @\mathcal{F}@; in particular @f^{-1}(\varnothing) = \varnothing \in \mathcal{F}@, whence @\mathcal{F} = \bot@. One similar argument shows that for any filter @\mathcal{G}@ on @Y@, we have @\mathcal{G} = \top@ if and only if @f^*\mathcal{G} = \top@.</p>
+</li>
+<li>
+<p>Let @X@ be a topological space, let @A \subseteq X@ be any subset, let @x \in X@ be some point and let @\mathcal{N}_x@ be the filter of neighborhoods around @x@. Denote @i : A \hookrightarrow X@ the inclusion map. Then @i^*(\mathcal{N}_x) = \bot@ if and only if the point @x@ is not in the closure of @A@. The gist of the argument is that any neighborhood of @x@ that does not intersect @A@ (such a neighborhood exists if and only if @x@ is not in the closure of @A@) can be arbitrarily extended to a larger neighborhood, possibly with many connected components.</p>
+</li>
+</ul>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/2025-02-05-making-determinants-my-friends/" class="button inline prev">
+        &lt; [<span class="button__text">The determinant of a matrix is just the product of its columns</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/2023-04-11-radical-intersection/" class="button inline next">
+         [<span class="button__text">Le radical est l&#39;intersection des idéaux maximaux</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+<div id="wcb" class="carbonbadge wcb-d"></div>
+<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,462 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Closing in closure in Clojure :: Marc-André Brochu&#39;s Oueb Site</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="Learning Clojure is a lot of fun. For one, the community is great.1 On top of that, there&rsquo;s many exercises available; that&rsquo;s excellent for people like me, who learn by doing. For instance, rich4clojure is a great resource. It works out-of-the-box with Visual Studio Code, which is nice when you just want to start working on problems asap and you&rsquo;ll just &ldquo;setup the tools later&rdquo;.
+Tonight, I&rsquo;m solving problem 84 from that set. I thought, maybe you&rsquo;d like to follow along with me. Here it goes:
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/2026-03-03-hard-clojure/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a2cc694a9b481f15d41722bffc2cc54eea4c4f74fd9072b0b33253604c22606e.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Closing in closure in Clojure">
+<meta property="og:description" content="Learning Clojure is a lot of fun. For one, the community is great.1 On top of that, there&rsquo;s many exercises available; that&rsquo;s excellent for people like me, who learn by doing. For instance, rich4clojure is a great resource. It works out-of-the-box with Visual Studio Code, which is nice when you just want to start working on problems asap and you&rsquo;ll just &ldquo;setup the tools later&rdquo;.
+Tonight, I&rsquo;m solving problem 84 from that set. I thought, maybe you&rsquo;d like to follow along with me. Here it goes:
+" />
+<meta property="og:url" content="//localhost:1313/posts/2026-03-03-hard-clojure/" />
+<meta property="og:site_name" content="Marc-André Brochu&#39;s Oueb Site" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2026-03-03 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['@@', '@@']],
+      inlineMath: [['@', '@']],
+    },
+    loader: {
+      load: ['ui/safe'],
+    },
+  };
+</script>
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Marc-André Brochu&#39;s Oueb Site
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://github.com/marcandrebrochu">GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu">YouTube</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://github.com/marcandrebrochu" >GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu" >YouTube</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/2026-03-03-hard-clojure/">Closing in closure in Clojure</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2026-03-03</time></div>
+
+  
+  
+
+
+  
+    <div class="table-of-contents">
+      <h2>
+        Table of Contents
+      </h2>
+      <nav id="TableOfContents">
+  <ul>
+    <li><a href="#algorithm-an-idea">Algorithm: An Idea</a></li>
+    <li><a href="#algorithm-implementation">Algorithm: Implementation</a></li>
+  </ul>
+</nav>
+    </div>
+  
+
+  <div class="post-content"><div>
+        <p>Learning Clojure is a lot of fun. For one, the community is great.<sup id="fnref:1"><a href="#fn:1" class="footnote-ref" role="doc-noteref">1</a></sup>
+On top of that, there&rsquo;s many exercises available; that&rsquo;s excellent for people like me, who learn by doing.
+For instance, <a href="https://github.com/PEZ/rich4clojure">rich4clojure</a> is a great resource.
+It works out-of-the-box with Visual Studio Code, which is nice when you just want to start working
+on problems asap and you&rsquo;ll just &ldquo;setup the tools later&rdquo;.</p>
+<p>Tonight, I&rsquo;m solving <a href="https://github.com/PEZ/rich4clojure/blob/main/src/rich4clojure/hard/problem_084.clj">problem 84</a> from that set.
+I thought, maybe you&rsquo;d like to follow along with me. Here it goes:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span><span style="color:#75715e">;; Write a function which generates the transitive closure</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; of a binary relation. The relation will be represented</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;; as a set of 2 item vectors.</span>
+</span></span></code></pre></div><p>As a reminder, the transitive closure of a relation is the smallest transitive relation that contains the original one as a subset.
+In other words, if originally @a@ and @b@ are in relation, and @b@ and @c@ are in relation, then @a@ and @c@ are in transitive relation
+and the pair @(a,c)@ will appear in the transitive closure.</p>
+<p>For instance, if we have a relation @R@ on the set @A=\{\text{cat},\text{man},\text{snake},\text{spider}\}@ given by
+</p>
+@@R = \{(\text{cat},\text{man}), (\text{man},\text{snake}),(\text{spider},\text{cat})\},@@<p>
+then its transitive closure would be
+</p>
+@@\overline{R} = R \cup \{(\text{cat},\text{snake}),(\text{spider},\text{man}),(\text{spider},\text{snake})\}.@@<p>In the given code, we have a test for that (obviously it currently fails since we haven&rsquo;t written any code yet):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#a6e22e">tests</span>
+</span></span><span style="display:flex;"><span> [more-legs
+</span></span><span style="display:flex;"><span>  <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>]}] <span style="color:#e6db74">:=</span>
+</span></span><span style="display:flex;"><span> (= (<span style="color:#a6e22e">transitive-closure</span> more-legs)
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>]
+</span></span><span style="display:flex;"><span>      [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>]}))
+</span></span></code></pre></div><p>Here the <code>transitive-closure</code> function is what we have to write.</p>
+<p>In fact, I couldn&rsquo;t make the test work (even before writing any code) because Clojure complains that <code>more-legs</code> isn&rsquo;t defined.
+I&rsquo;m not sure how the testing library used in those exercises work, so I just replaced this test (and all the other ones, too) with:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#a6e22e">tests</span>
+</span></span><span style="display:flex;"><span> (= (<span style="color:#a6e22e">transitive-closure</span> <span style="color:#f92672">#</span>{[<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">8</span>] [<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">9</span>] [<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>] [<span style="color:#ae81ff">9</span> <span style="color:#ae81ff">27</span>]}) <span style="color:#f92672">#</span>{[<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">2</span>] [<span style="color:#ae81ff">8</span> <span style="color:#ae81ff">4</span>] [<span style="color:#ae81ff">8</span> <span style="color:#ae81ff">2</span>] [<span style="color:#ae81ff">9</span> <span style="color:#ae81ff">3</span>] [<span style="color:#ae81ff">27</span> <span style="color:#ae81ff">9</span>] [<span style="color:#ae81ff">27</span> <span style="color:#ae81ff">3</span>]})
+</span></span><span style="display:flex;"><span> (= (<span style="color:#a6e22e">transitive-closure</span> <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>]})
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>]})
+</span></span><span style="display:flex;"><span> (= (<span style="color:#a6e22e">transitive-closure</span> <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;father&#34;</span> <span style="color:#e6db74">&#34;son&#34;</span>] [<span style="color:#e6db74">&#34;uncle&#34;</span> <span style="color:#e6db74">&#34;cousin&#34;</span>] [<span style="color:#e6db74">&#34;son&#34;</span> <span style="color:#e6db74">&#34;grandson&#34;</span>]})
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;father&#34;</span> <span style="color:#e6db74">&#34;son&#34;</span>] [<span style="color:#e6db74">&#34;father&#34;</span> <span style="color:#e6db74">&#34;grandson&#34;</span>] [<span style="color:#e6db74">&#34;uncle&#34;</span> <span style="color:#e6db74">&#34;cousin&#34;</span>] [<span style="color:#e6db74">&#34;son&#34;</span> <span style="color:#e6db74">&#34;grandson&#34;</span>]}))
+</span></span></code></pre></div><h2 id="algorithm-an-idea">Algorithm: An Idea<a href="#algorithm-an-idea" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>The first idea I had is naive (because it&rsquo;s still new), but maybe it&rsquo;ll work.
+Suppose we have some set @R \subseteq A^2@, where as above @A@ is the &ldquo;underlying set&rdquo; of our relation @R@.
+What we&rsquo;re going to do is, set the &ldquo;first level&rdquo; @R_1 = R@. Imagine the pairs in @R@ as &ldquo;atomic paths&rdquo;, or &ldquo;paths of length 1&rdquo;.
+The idea is to make an algorithm that will produce @R_2@, the &ldquo;paths of length 2&rdquo;, then @R_3@, then @R_4@, &hellip; ad infinitum.
+As @n@ tends to infinity, the set @R_n@ should tend to the transitive closure of @R@ (notation @\overline{R}@).
+In our case, since @R@ is a finite set, we won&rsquo;t even have to get to infinity: there should exist some natural number @N@ such that @R_N = \overline{R}@.
+Hopefully, @N@ is small enough, and computing @R_n@ given @R@ is quick enough.</p>
+<p>In any case, the first step should be to convince ourselves that
+</p>
+@@\overline{R} = \bigcup_{n=1}^\infty R_n.@@<p><strong>Proof</strong>. To avoid writing that big cup everywhere, let @S = \bigcup_{n=1}^\infty R_n@.
+By definition, @S@ contains @R@.
+Also, @S@ is a transitive relation on @A@. To see this, suppose that @a S b@ and @b S c@.
+Hence, there exists two natural numbers @k,\ell \geq 1@ such that @(a,b)\in R_k@ and @(b,c)\in R_\ell@.
+This means there is a &ldquo;path&rdquo; of length @k@ from @a@ to @b@ in @A@, and a &ldquo;path&rdquo; of length @\ell@ from @b@ to @c@ in @A@.
+By &ldquo;concatenating&rdquo; those paths, we get a path of length @k+\ell@ from @a@ to @c@ in @A@.
+Hence, by defintion @(a,c) \in R_{k+\ell}@, so that @aSc@ as we wanted.</p>
+<p>We showed @S@ is a transitive relation which contains @R@. We still need to show it&rsquo;s the smallest.
+Let @T \subseteq A^2@ be any other transitive relation on @A@ which contains @R@.
+Any @(a,b) \in S@ is proof that there is a path @\pi@ from @a@ to @b@ in @A@, of a certain finite length.
+Because @T@ contains @R@, all of the &ldquo;atomic paths&rdquo; or &ldquo;paths of length 1&rdquo; that make up @\pi@ are contained in @T@.
+Since @T@ is transitive, that means there must be an atomic path from @a@ to @b@ in @T@, i.e. @aTb@.
+Thus @S \subseteq T@, which shows @S@ is the smallest transitive relation containing @R@, as we wanted. @\blacksquare@</p>
+<h2 id="algorithm-implementation">Algorithm: Implementation<a href="#algorithm-implementation" class="hanchor" ariaLabel="Anchor">#</a> </h2>
+<p>First, let&rsquo;s define a constant that&rsquo;s going to be our relation (let say it&rsquo;s a relation on @\text{String}@):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#a6e22e">comment</span>
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">def </span>demo-rel <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>]})
+</span></span><span style="display:flex;"><span>  ,)
+</span></span></code></pre></div><p>By the way, this comma before the last parenthesis in a rich comment is a trick to control autoformatting that I learned in some YouTube video.</p>
+<p>Anyways, suppose we already have some @R_n@ and we want to construct @R_{n+1}@.
+Given a pair such as <code>[&quot;spider&quot;, &quot;man&quot;]</code> in @R_n@, we&rsquo;ll want to find all atomic paths in @R@ that <em>begin</em> with <code>&quot;man&quot;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(filter (<span style="color:#66d9ef">fn </span>[p] (= <span style="color:#e6db74">&#34;man&#34;</span> (first p))) demo-rel) <span style="color:#75715e">;=&gt; ([&#34;man&#34; &#34;snake&#34;])</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">; now package that into a shiny function</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>find-steps [genset apath]
+</span></span><span style="display:flex;"><span>  (filter (<span style="color:#66d9ef">fn </span>[p] (= (second apath) (first p))) genset))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">find-steps</span> demo-rel [<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>]) <span style="color:#75715e">;=&gt; ([&#34;man&#34; &#34;snake&#34;])</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">find-steps</span> demo-rel [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>]) <span style="color:#75715e">;=&gt; ()</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">find-steps</span> demo-rel [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>]) <span style="color:#75715e">;=&gt; ([&#34;cat&#34; &#34;man&#34;])</span>
+</span></span></code></pre></div><p>What I call <code>genset</code> in the code is what&rsquo;ve called @R@ in this article.
+The function is named <code>find-steps</code> because I felt like atomic paths in @R@ are like a &ldquo;small step&rdquo; that you take when you&rsquo;ve reached the end of the path, to increase it.</p>
+<p>Now, we&rsquo;ll &ldquo;concatenate&rdquo; those &ldquo;steps&rdquo; with the given paths to obtain longer (@n+1@) paths that all start with <code>&quot;spider&quot;</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(map (<span style="color:#66d9ef">fn </span>[p] [<span style="color:#e6db74">&#34;cat&#34;</span> (second p)])
+</span></span><span style="display:flex;"><span>     (<span style="color:#a6e22e">find-steps</span> demo-rel [<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>])) <span style="color:#75715e">;=&gt; ([&#34;cat&#34; &#34;snake&#34;])</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">; package into shiney function again</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>concat-steps [genset apath]
+</span></span><span style="display:flex;"><span>  (map (<span style="color:#66d9ef">fn </span>[p] [(first apath) (second p)])
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">find-steps</span> genset apath)))
+</span></span><span style="display:flex;"><span>  
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">concat-steps</span> demo-rel [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>]) <span style="color:#75715e">;=&gt; ([&#34;spider&#34; &#34;man&#34;])</span>
+</span></span></code></pre></div><p>As we do that for each element in the finite set @R_n@ and collect the results, we will obtain @R_{n+1}@.
+Indeed, any path of length @n+1@ must start with path of length @n@ (i.e. an element of @R_n@), to which is concatenated an atomic path of @R@.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(map (<span style="color:#66d9ef">fn </span>[p] (<span style="color:#a6e22e">concat-steps</span> demo-rel p)) demo-rel) <span style="color:#75715e">;=&gt; (() ([&#34;cat&#34; &#34;snake&#34;]) ([&#34;spider&#34; &#34;man&#34;]))</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">; previous evaluation: would like to reduce the list,</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">; interpreting the internal lists as sets to union together</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">; So:</span>
+</span></span><span style="display:flex;"><span>(map (<span style="color:#66d9ef">fn </span>[p] (set (<span style="color:#a6e22e">concat-steps</span> demo-rel p))) demo-rel)
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;=&gt; (#{} #{[&#34;cat&#34; &#34;snake&#34;]} #{[&#34;spider&#34; &#34;man&#34;]})</span>
+</span></span></code></pre></div><p>Now to get the ability to correctly work with sets, we import <code>[clojure.set :as set]</code> in our namespace. Then,</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(reduce (<span style="color:#66d9ef">fn </span>[u s] (<span style="color:#a6e22e">set/union</span> u s))
+</span></span><span style="display:flex;"><span>        (map (<span style="color:#66d9ef">fn </span>[p] (set (<span style="color:#a6e22e">concat-steps</span> demo-rel p))) demo-rel))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;=&gt; #{[&#34;spider&#34; &#34;man&#34;] [&#34;cat&#34; &#34;snake&#34;]}</span>
+</span></span></code></pre></div><p>We bundle this into a function as before (note that two first evaluations are for the internal forms in the defs):</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>step [genset curset]
+</span></span><span style="display:flex;"><span>  (reduce (<span style="color:#66d9ef">fn </span>[u s] (<span style="color:#a6e22e">set/union</span> u s))
+</span></span><span style="display:flex;"><span>          (map (<span style="color:#66d9ef">fn </span>[p] (set (<span style="color:#a6e22e">concat-steps</span> genset p))) curset)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>r2 (<span style="color:#a6e22e">step</span> demo-rel demo-rel)) <span style="color:#75715e">;=&gt; #{[&#34;spider&#34; &#34;man&#34;] [&#34;cat&#34; &#34;snake&#34;]}</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">def </span>r3 (<span style="color:#a6e22e">step</span> demo-rel r2)) <span style="color:#75715e">;=&gt; #{[&#34;spider&#34; &#34;snake&#34;]}</span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">step</span> demo-rel r3) <span style="color:#75715e">;=&gt; #{}</span>
+</span></span></code></pre></div><p>Interestingly, this ends with @R_3@ being the empty set.
+I wonder if that always happen for all starting relations @R@, when @R@ is finite&hellip;
+But let&rsquo;s not get carried away. This is marked here for future investigation; let&rsquo;s finish the algorithm like we planned.</p>
+<p>We&rsquo;ll use the lazy list facilities that Clojure provides for us:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(take <span style="color:#ae81ff">4</span> (iterate (<span style="color:#66d9ef">fn </span>[curset] (<span style="color:#a6e22e">step</span> demo-rel curset)) demo-rel))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;=&gt; (#{[&#34;man&#34; &#34;snake&#34;] [&#34;cat&#34; &#34;man&#34;] [&#34;spider&#34; &#34;cat&#34;]} #{[&#34;spider&#34; &#34;man&#34;] [&#34;cat&#34; &#34;snake&#34;]} #{[&#34;spider&#34; &#34;snake&#34;]} #{})</span>
+</span></span></code></pre></div><p>This is essentially (if we remove the top-level <code>take</code> call) our infinite tower of @R_n@&rsquo;s that we called @S@ above.
+Let&rsquo;s encapsulate that in a function.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>tower [genset]
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">reductions</span> (<span style="color:#66d9ef">fn </span>[u s] (<span style="color:#a6e22e">set/union</span> u s))
+</span></span><span style="display:flex;"><span>              (iterate (<span style="color:#66d9ef">fn </span>[curset] (<span style="color:#a6e22e">step</span> genset curset)) genset)))
+</span></span></code></pre></div><p>We want to reduce the list using union but we want each intermediate result, to detect when the tower stabilize.
+The function to use in this case seems to be <code>reductions</code>.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(take <span style="color:#ae81ff">4</span> (<span style="color:#a6e22e">reductions</span> (<span style="color:#66d9ef">fn </span>[u s] (<span style="color:#a6e22e">set/union</span> u s))
+</span></span><span style="display:flex;"><span>                    (iterate (<span style="color:#66d9ef">fn </span>[curset] (<span style="color:#a6e22e">step</span> demo-rel curset)) demo-rel)))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;=&gt; (#{[&#34;man&#34; &#34;snake&#34;] [&#34;cat&#34; &#34;man&#34;] [&#34;spider&#34; &#34;cat&#34;]}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;    #{[&#34;man&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;man&#34;] [&#34;cat&#34; &#34;man&#34;] [&#34;cat&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;cat&#34;]}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;    #{[&#34;man&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;man&#34;] [&#34;cat&#34; &#34;man&#34;] [&#34;cat&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;cat&#34;]}</span>
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;    #{[&#34;man&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;man&#34;] [&#34;cat&#34; &#34;man&#34;] [&#34;cat&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;cat&#34;]})</span>
+</span></span></code></pre></div><p>We can see the stabilization phenomenon at work just above. I believe the following function should do the trick.
+It expects an infinite list, and as soon as it detects that two consecutive elements in the list have the same value,
+it returns that value.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>zip [l1 l2] (map vector l1 l2))
+</span></span><span style="display:flex;"><span>(take <span style="color:#ae81ff">4</span> (<span style="color:#a6e22e">zip</span> (cons nil (iterate inc <span style="color:#ae81ff">0</span>)) (iterate inc <span style="color:#ae81ff">0</span>)))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;=&gt; ([nil 0] [0 1] [1 2] [2 3])</span>
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>stabilized [inf-list]
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">let </span>[zipped (<span style="color:#a6e22e">zip</span> (cons nil inf-list) inf-list)]
+</span></span><span style="display:flex;"><span>    (first (first (drop-while (<span style="color:#66d9ef">fn </span>[p] (not= (first p) (second p))) zipped)))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#a6e22e">stabilized</span> (<span style="color:#a6e22e">tower</span> demo-rel))
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;=&gt; #{[&#34;man&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;man&#34;] [&#34;cat&#34; &#34;man&#34;] [&#34;cat&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;snake&#34;] [&#34;spider&#34; &#34;cat&#34;]}</span>
+</span></span></code></pre></div><p>Hey! That does seem to be what we want. Let&rsquo;s wrap this up in a function and see if it passes the tests.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>transitive-closure [genset]
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">stabilized</span> (<span style="color:#a6e22e">tower</span> genset)))
+</span></span></code></pre></div><p>Looks like this is <em>almost</em> working&hellip;</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#a6e22e">tests</span>
+</span></span><span style="display:flex;"><span> (= (<span style="color:#a6e22e">transitive-closure</span> <span style="color:#f92672">#</span>{[<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">8</span>] [<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">9</span>] [<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>] [<span style="color:#ae81ff">9</span> <span style="color:#ae81ff">27</span>]}) <span style="color:#f92672">#</span>{[<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">2</span>] [<span style="color:#ae81ff">8</span> <span style="color:#ae81ff">4</span>] [<span style="color:#ae81ff">8</span> <span style="color:#ae81ff">2</span>] [<span style="color:#ae81ff">9</span> <span style="color:#ae81ff">3</span>] [<span style="color:#ae81ff">27</span> <span style="color:#ae81ff">9</span>] [<span style="color:#ae81ff">27</span> <span style="color:#ae81ff">3</span>]})
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">;=&gt; false</span>
+</span></span><span style="display:flex;"><span> (= (<span style="color:#a6e22e">transitive-closure</span> <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>]})
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;cat&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;man&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;cat&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;man&#34;</span>] [<span style="color:#e6db74">&#34;spider&#34;</span> <span style="color:#e6db74">&#34;snake&#34;</span>]})
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">;=&gt; true</span>
+</span></span><span style="display:flex;"><span> (= (<span style="color:#a6e22e">transitive-closure</span> <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;father&#34;</span> <span style="color:#e6db74">&#34;son&#34;</span>] [<span style="color:#e6db74">&#34;uncle&#34;</span> <span style="color:#e6db74">&#34;cousin&#34;</span>] [<span style="color:#e6db74">&#34;son&#34;</span> <span style="color:#e6db74">&#34;grandson&#34;</span>]})
+</span></span><span style="display:flex;"><span>    <span style="color:#f92672">#</span>{[<span style="color:#e6db74">&#34;father&#34;</span> <span style="color:#e6db74">&#34;son&#34;</span>] [<span style="color:#e6db74">&#34;father&#34;</span> <span style="color:#e6db74">&#34;grandson&#34;</span>] [<span style="color:#e6db74">&#34;uncle&#34;</span> <span style="color:#e6db74">&#34;cousin&#34;</span>] [<span style="color:#e6db74">&#34;son&#34;</span> <span style="color:#e6db74">&#34;grandson&#34;</span>]}))
+</span></span><span style="display:flex;"><span> <span style="color:#75715e">;=&gt; true</span>
+</span></span></code></pre></div><p>The first case doesn&rsquo;t pass. This is supposed to be a &ldquo;divides&rdquo; relation on the natural numbers.
+Oh, my, I see the problem. Looks like the problem is actually with the test itself. In the right-hand side
+of the equality, I wrote the relation backwards. The smaller number should come first in each vector.</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(= (<span style="color:#a6e22e">transitive-closure</span> <span style="color:#f92672">#</span>{[<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">8</span>] [<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">9</span>] [<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>] [<span style="color:#ae81ff">9</span> <span style="color:#ae81ff">27</span>]}) <span style="color:#f92672">#</span>{[<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">4</span>] [<span style="color:#ae81ff">4</span> <span style="color:#ae81ff">8</span>] [<span style="color:#ae81ff">2</span> <span style="color:#ae81ff">8</span>] [<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">9</span>] [<span style="color:#ae81ff">9</span> <span style="color:#ae81ff">27</span>] [<span style="color:#ae81ff">3</span> <span style="color:#ae81ff">27</span>]})
+</span></span><span style="display:flex;"><span><span style="color:#75715e">;=&gt; true</span>
+</span></span></code></pre></div><p>Now this evaluates to <code>true</code>, as it should. Welp, those three tests convince me. We&rsquo;re done here!
+I hope you enjoyed my write up of how I think about these problems.
+Of course this is a simple problem overall, and I probably solved it once or twice in my early university years and forgotten about it.
+Nonetheless, it&rsquo;s a great problem to try and work out some Clojure skills, and work with the REPL!</p>
+<p>Here&rsquo;s the full solution, in its 22-lines glory/gory:</p>
+<div class="highlight"><pre tabindex="0" style="color:#f8f8f2;background-color:#272822;-moz-tab-size:4;-o-tab-size:4;tab-size:4;-webkit-text-size-adjust:none;"><code class="language-clojure" data-lang="clojure"><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>find-steps [genset apath]
+</span></span><span style="display:flex;"><span>  (filter (<span style="color:#66d9ef">fn </span>[p] (= (second apath) (first p))) genset))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>concat-steps [genset apath]
+</span></span><span style="display:flex;"><span>  (map (<span style="color:#66d9ef">fn </span>[p] [(first apath) (second p)])
+</span></span><span style="display:flex;"><span>       (<span style="color:#a6e22e">find-steps</span> genset apath)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>step [genset curset]
+</span></span><span style="display:flex;"><span>  (reduce (<span style="color:#66d9ef">fn </span>[u s] (<span style="color:#a6e22e">set/union</span> u s))
+</span></span><span style="display:flex;"><span>          (map (<span style="color:#66d9ef">fn </span>[p] (set (<span style="color:#a6e22e">concat-steps</span> genset p))) curset)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>tower [genset]
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">reductions</span> (<span style="color:#66d9ef">fn </span>[u s] (<span style="color:#a6e22e">set/union</span> u s))
+</span></span><span style="display:flex;"><span>              (iterate (<span style="color:#66d9ef">fn </span>[curset] (<span style="color:#a6e22e">step</span> genset curset)) genset)))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>zip [l1 l2] (map vector l1 l2))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>stabilized [inf-list]
+</span></span><span style="display:flex;"><span>  (<span style="color:#66d9ef">let </span>[zipped (<span style="color:#a6e22e">zip</span> (cons nil inf-list) inf-list)]
+</span></span><span style="display:flex;"><span>    (first (first (drop-while (<span style="color:#66d9ef">fn </span>[p] (not= (first p) (second p))) zipped)))))
+</span></span><span style="display:flex;"><span>
+</span></span><span style="display:flex;"><span>(<span style="color:#66d9ef">defn </span>transitive-closure [genset]
+</span></span><span style="display:flex;"><span>  (<span style="color:#a6e22e">stabilized</span> (<span style="color:#a6e22e">tower</span> genset)))
+</span></span></code></pre></div><p>Even though this is probably the worst code you&rsquo;ve seen today/this week/this millenia, it&rsquo;s quite impressive to think Clojure allows
+you to express such a solution in so few lines.</p>
+<div class="footnotes" role="doc-endnotes">
+<hr>
+<ol>
+<li id="fn:1">
+<p>Although a bit culty about BDFL Rich Hickey.&#160;<a href="#fnref:1" class="footnote-backref" role="doc-backlink">&#x21a9;&#xfe0e;</a></p>
+</li>
+</ol>
+</div>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/2026-03-07-ergold/" class="button inline prev">
+        &lt; [<span class="button__text">Passer du clavier CSA à Ergo-L</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/2025-02-22-direct-limits/" class="button inline next">
+         [<span class="button__text">Direct limits, and how to compute them from cofinal subsets</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+<div id="wcb" class="carbonbadge wcb-d"></div>
+<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+
+  
+</div>
+
+</body>
+</html>

@@ -1,0 +1,273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head><script src="/livereload.js?mindelay=10&amp;v=2&amp;port=1313&amp;path=livereload" data-no-instant defer></script>
+  
+    <title>Le radical est l&#39;intersection des idéaux maximaux :: Marc-André Brochu&#39;s Oueb Site</title>
+  
+  <meta http-equiv="content-type" content="text/html; charset=utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<meta name="description" content="L&rsquo;exercice 1.1 d&rsquo;Ottem et Ellingsrud demande:
+In any ring the radical of an ideal @\mathfrak{a}@ equals the intersection of the prime ideals containing the ideal. Show, using the Nullstellensatz, that in the polynomial ring @k[x_1,\dots,x_n]@ the radical @\sqrt{\mathfrak{a}}@ equals the intersection of all the maximal ideals containing @\mathfrak{a}@.
+Tout d&rsquo;abord, je souhaite me rafraîchir la mémoire et redémontrer la première assertion qu&rsquo;ils font, c&rsquo;est-à-dire que le radical d&rsquo;un idéal est en fait l&rsquo;intersection de tous les idéaux premiers qui le contiennent. Je trouve que c&rsquo;est une caractérisation intéressante du radical. Peut-être même que je vais créer un autre article spécifiquement pour ça ! La preuve n&rsquo;est pas triviale, en tout cas pour l&rsquo;une des deux inclusions. La première inclusion est facile à voir: soit @\{\mathfrak{p}_i\}_{i\in I}@ la collection de tous les idéaux premiers qui contiennent @\mathfrak{a}@. Vu que pour tout idéal premier @x^n \in \mathfrak{p_i}@ implique que @x\in\mathfrak{p_i}@ (pour un certain entier @n\geq 1@), il est clair que @\sqrt{\mathfrak{a}}\subseteq \bigcap_{i\in I}\mathfrak{p_i}@. C&rsquo;est la seconde inclusion qui pose problème. Je vais la montrer par contrapositive: soit @x\notin \sqrt{\mathfrak{a}}@. Je considère la collection @\mathcal{I}@ des idéaux @\mathfrak{b}\supseteq \mathfrak{a}@ tels que @x^n\notin\mathfrak{b}@ pour tout entier @n\geq 1@. Si j&rsquo;ordonne partiellement cette collection par l&rsquo;inclusion, le lemme de Zorn me donne l&rsquo;existence d&rsquo;un élément maximal @\mathfrak{p}\in\mathcal{I}@. Je veux montrer que @\mathfrak{p}@ est premier. Soit @a@ et @b@ deux éléments de l&rsquo;anneau tels que @a,b\notin \mathfrak{p}@. Par maximalité, ni @\mathfrak{p}&#43;(a)@ ni @\mathfrak{p}&#43;(b)@ ne font partie de la collection @\mathcal{I}@. Par exemple, comme @a\notin \mathfrak{p}@, l&rsquo;idéal @\mathfrak{p}&#43;(a)@ (i.e. le plus petit idéal qui contient à la fois @\mathfrak{p}@ et @(a)@) contient strictement @\mathfrak{p}@. Donc il existe deux entiers @n@ et @m@ tels que @x^n\in \mathfrak{p}&#43;(a)@ et @x^m\in\mathfrak{p}&#43;(b)@. Puisque l&rsquo;idéal @\mathfrak{p}&#43;(ab)@ contient @x^{n&#43;m}@, il n&rsquo;est lui non plus pas contenu dans @\mathcal{I}@. En particulier @ab\notin\mathfrak{p}@ car sinon ajouter @(ab)@ à @\mathfrak{p}@ n&rsquo;aurait rien changé, ce qui n&rsquo;est pas le cas. Cela prouve que @\mathfrak{p}@ est premier. Mais alors @\bigcap_{i\in I}\mathfrak{p}_i\subseteq \mathfrak{p}@ et puisque @x\notin \mathfrak{p}@ par construction, je retrouve bien que @x\notin\bigcap_{i\in I}\mathfrak{p_i}@, ce qu&rsquo;il fallait démontrer.
+" />
+<meta name="keywords" content="" />
+
+  <meta name="robots" content="noodp" />
+
+<link rel="canonical" href="//localhost:1313/posts/2023-04-11-radical-intersection/" />
+
+
+
+
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/buttons.min.86f6b4c106b6c6eb690ae5203d36b442c1f66f718ff4e8164fa86cf6c61ad641.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/code.min.c4581949edab7810737609fc5568852bcd908945f14561e366dcd2300a370545.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/fonts.min.5bb7ed13e1d00d8ff39ea84af26737007eb5051b157b86fc24487c94f3dc8bbe.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/footer.min.eb8dfc2c6a7eafa36cd3ba92d63e69e849e2200e0002a228d137f236b09ecd75.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/gist.min.a751e8b0abe1ba8bc53ced52a38b19d8950fe78ca29454ea8c2595cf26aad5c0.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/header.min.75c7eb0e2872d95ff48109c6647d0223a38db52e2561dd87966eb5fc7c6bdac6.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/main.min.36833afd348409fc6c3d09d0897c5833d9d5bf1ff31f5e60ea3ee42ce2b1268c.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/menu.min.3c17467ebeb3d38663dce68f71f519901124fa5cbb4519b2fb0667a21e9aca39.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/pagination.min.bbb986dbce00a5ce5aca0504b7925fc1c581992a4bf57f163e5d69cc1db7d836.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/post.min.e6dddd258e64c83e05cec0cd49c05216742d42fc8ecbfbe6b67083412b609bd3.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/syntax.min.a2cc694a9b481f15d41722bffc2cc54eea4c4f74fd9072b0b33253604c22606e.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terminal.min.e3b0c44298fc1c149afbf4c8996fb92427ae41e4649b934ca495991b7852b855.css">
+
+  
+  <link rel="stylesheet" href="//localhost:1313/css/terms.min.b81791663c3790e738e571cdbf802312390d30e4b1d8dc9d814a5b5454d0ac11.css">
+
+
+
+
+
+
+
+<link rel="shortcut icon" href="//localhost:1313/favicon.png">
+<link rel="apple-touch-icon" href="//localhost:1313/apple-touch-icon.png">
+
+
+<meta name="twitter:card" content="summary" />
+
+
+
+<meta property="og:locale" content="en" />
+<meta property="og:type" content="article" />
+<meta property="og:title" content="Le radical est l&#39;intersection des idéaux maximaux">
+<meta property="og:description" content="L&rsquo;exercice 1.1 d&rsquo;Ottem et Ellingsrud demande:
+In any ring the radical of an ideal @\mathfrak{a}@ equals the intersection of the prime ideals containing the ideal. Show, using the Nullstellensatz, that in the polynomial ring @k[x_1,\dots,x_n]@ the radical @\sqrt{\mathfrak{a}}@ equals the intersection of all the maximal ideals containing @\mathfrak{a}@.
+Tout d&rsquo;abord, je souhaite me rafraîchir la mémoire et redémontrer la première assertion qu&rsquo;ils font, c&rsquo;est-à-dire que le radical d&rsquo;un idéal est en fait l&rsquo;intersection de tous les idéaux premiers qui le contiennent. Je trouve que c&rsquo;est une caractérisation intéressante du radical. Peut-être même que je vais créer un autre article spécifiquement pour ça ! La preuve n&rsquo;est pas triviale, en tout cas pour l&rsquo;une des deux inclusions. La première inclusion est facile à voir: soit @\{\mathfrak{p}_i\}_{i\in I}@ la collection de tous les idéaux premiers qui contiennent @\mathfrak{a}@. Vu que pour tout idéal premier @x^n \in \mathfrak{p_i}@ implique que @x\in\mathfrak{p_i}@ (pour un certain entier @n\geq 1@), il est clair que @\sqrt{\mathfrak{a}}\subseteq \bigcap_{i\in I}\mathfrak{p_i}@. C&rsquo;est la seconde inclusion qui pose problème. Je vais la montrer par contrapositive: soit @x\notin \sqrt{\mathfrak{a}}@. Je considère la collection @\mathcal{I}@ des idéaux @\mathfrak{b}\supseteq \mathfrak{a}@ tels que @x^n\notin\mathfrak{b}@ pour tout entier @n\geq 1@. Si j&rsquo;ordonne partiellement cette collection par l&rsquo;inclusion, le lemme de Zorn me donne l&rsquo;existence d&rsquo;un élément maximal @\mathfrak{p}\in\mathcal{I}@. Je veux montrer que @\mathfrak{p}@ est premier. Soit @a@ et @b@ deux éléments de l&rsquo;anneau tels que @a,b\notin \mathfrak{p}@. Par maximalité, ni @\mathfrak{p}&#43;(a)@ ni @\mathfrak{p}&#43;(b)@ ne font partie de la collection @\mathcal{I}@. Par exemple, comme @a\notin \mathfrak{p}@, l&rsquo;idéal @\mathfrak{p}&#43;(a)@ (i.e. le plus petit idéal qui contient à la fois @\mathfrak{p}@ et @(a)@) contient strictement @\mathfrak{p}@. Donc il existe deux entiers @n@ et @m@ tels que @x^n\in \mathfrak{p}&#43;(a)@ et @x^m\in\mathfrak{p}&#43;(b)@. Puisque l&rsquo;idéal @\mathfrak{p}&#43;(ab)@ contient @x^{n&#43;m}@, il n&rsquo;est lui non plus pas contenu dans @\mathcal{I}@. En particulier @ab\notin\mathfrak{p}@ car sinon ajouter @(ab)@ à @\mathfrak{p}@ n&rsquo;aurait rien changé, ce qui n&rsquo;est pas le cas. Cela prouve que @\mathfrak{p}@ est premier. Mais alors @\bigcap_{i\in I}\mathfrak{p}_i\subseteq \mathfrak{p}@ et puisque @x\notin \mathfrak{p}@ par construction, je retrouve bien que @x\notin\bigcap_{i\in I}\mathfrak{p_i}@, ce qu&rsquo;il fallait démontrer.
+" />
+<meta property="og:url" content="//localhost:1313/posts/2023-04-11-radical-intersection/" />
+<meta property="og:site_name" content="Marc-André Brochu&#39;s Oueb Site" />
+
+  <meta property="og:image" content="//localhost:1313/og-image.png">
+
+<meta property="og:image:width" content="1200">
+<meta property="og:image:height" content="627">
+
+
+  <meta property="article:published_time" content="2023-04-11 00:00:00 &#43;0000 UTC" />
+
+
+
+
+
+
+
+
+
+
+  <script id="MathJax-script" async src="https://cdn.jsdelivr.net/npm/mathjax@4/tex-mml-chtml.js"></script>
+
+<script>
+  MathJax = {
+    tex: {
+      displayMath: [['@@', '@@']],
+      inlineMath: [['@', '@']],
+    },
+    loader: {
+      load: ['ui/safe'],
+    },
+  };
+</script>
+
+
+</head>
+<body>
+
+
+<div class="container center">
+
+  <header class="header">
+  <div class="header__inner">
+    <div class="header__logo">
+      <a href="/">
+  <div class="logo">
+    Marc-André Brochu&#39;s Oueb Site
+  </div>
+</a>
+
+    </div>
+    
+      <ul class="menu menu--mobile">
+  <li class="menu__trigger">Menu&nbsp;▾</li>
+  <li>
+    <ul class="menu__dropdown">
+      
+        
+          <li><a href="https://github.com/marcandrebrochu">GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu">YouTube</a></li>
+        
+      
+      
+    </ul>
+  </li>
+</ul>
+
+    
+    
+  </div>
+  
+    <nav class="navigation-menu">
+  <ul class="navigation-menu__inner menu--desktop">
+    
+      
+        
+          <li><a href="https://github.com/marcandrebrochu" >GitHub</a></li>
+        
+      
+        
+          <li><a href="https://www.youtube.com/@marc-andre.brochu" >YouTube</a></li>
+        
+      
+      
+    
+  </ul>
+</nav>
+
+  
+</header>
+
+
+  <div class="content">
+    
+<article class="post">
+  <h1 class="post-title">
+    <a href="//localhost:1313/posts/2023-04-11-radical-intersection/">Le radical est l&rsquo;intersection des idéaux maximaux</a>
+  </h1>
+  <div class="post-meta"><time class="post-date">2023-04-11</time></div>
+
+  
+  
+
+
+  
+
+  <div class="post-content"><div>
+        <p>L&rsquo;exercice 1.1 d&rsquo;Ottem et Ellingsrud demande:</p>
+<blockquote>
+<p>In any ring the radical of an ideal @\mathfrak{a}@ equals the intersection of the prime ideals containing the ideal. Show, using the Nullstellensatz, that in the polynomial ring @k[x_1,\dots,x_n]@ the radical @\sqrt{\mathfrak{a}}@ equals the intersection of all the <em>maximal</em> ideals containing @\mathfrak{a}@.</p>
+</blockquote>
+<p>Tout d&rsquo;abord, je souhaite me rafraîchir la mémoire et redémontrer la première assertion qu&rsquo;ils font, c&rsquo;est-à-dire que le radical d&rsquo;un idéal est en fait l&rsquo;intersection de tous les idéaux premiers qui le contiennent. Je trouve que c&rsquo;est une caractérisation intéressante du radical. Peut-être même que je vais créer un autre article spécifiquement pour ça ! La preuve n&rsquo;est pas triviale, en tout cas pour l&rsquo;une des deux inclusions.
+La première inclusion est facile à voir: soit @\{\mathfrak{p}_i\}_{i\in I}@ la collection de tous les idéaux premiers qui contiennent @\mathfrak{a}@. Vu que pour tout idéal premier @x^n \in \mathfrak{p_i}@ implique que @x\in\mathfrak{p_i}@ (pour un certain entier @n\geq 1@), il est clair que @\sqrt{\mathfrak{a}}\subseteq \bigcap_{i\in I}\mathfrak{p_i}@.
+C&rsquo;est la seconde inclusion qui pose problème. Je vais la montrer par contrapositive: soit @x\notin \sqrt{\mathfrak{a}}@. Je considère la collection @\mathcal{I}@ des idéaux @\mathfrak{b}\supseteq \mathfrak{a}@ tels que @x^n\notin\mathfrak{b}@ pour tout entier @n\geq 1@.
+Si j&rsquo;ordonne partiellement cette collection par l&rsquo;inclusion, le lemme de Zorn me donne l&rsquo;existence d&rsquo;un élément maximal @\mathfrak{p}\in\mathcal{I}@. Je veux montrer que @\mathfrak{p}@ est premier. Soit @a@ et @b@ deux éléments de l&rsquo;anneau tels que @a,b\notin \mathfrak{p}@. Par maximalité, ni @\mathfrak{p}+(a)@ ni @\mathfrak{p}+(b)@ ne font partie de la collection @\mathcal{I}@. Par exemple, comme @a\notin \mathfrak{p}@, l&rsquo;idéal @\mathfrak{p}+(a)@ (i.e. le plus petit idéal qui contient à la fois @\mathfrak{p}@ et @(a)@) contient strictement @\mathfrak{p}@. Donc il existe deux entiers @n@ et @m@ tels que @x^n\in \mathfrak{p}+(a)@ et @x^m\in\mathfrak{p}+(b)@. Puisque l&rsquo;idéal @\mathfrak{p}+(ab)@ contient @x^{n+m}@, il n&rsquo;est lui non plus pas contenu dans @\mathcal{I}@. En particulier @ab\notin\mathfrak{p}@ car sinon ajouter @(ab)@ à @\mathfrak{p}@ n&rsquo;aurait rien changé, ce qui n&rsquo;est pas le cas. Cela prouve que @\mathfrak{p}@ est premier. Mais alors @\bigcap_{i\in I}\mathfrak{p}_i\subseteq \mathfrak{p}@ et puisque @x\notin \mathfrak{p}@ par construction, je retrouve bien que @x\notin\bigcap_{i\in I}\mathfrak{p_i}@, ce qu&rsquo;il fallait démontrer.</p>
+<p>Tout ce gros paragraphe n&rsquo;est toutefois pas ce qu&rsquo;il faut faire dans l&rsquo;exercice, oops. En fait l&rsquo;exercice est beaucoup plus facile. Déjà, comme tout idéal maximal est premier, j&rsquo;obtiens par le même argument que dans le paragraphe précédent l&rsquo;inclusion @\sqrt{\mathfrak{a}}\subseteq \bigcap_{i\in I}\mathfrak{m_i}@, où @\{\mathfrak{m}_i\}_{i\in I}@ est la collection des idéaux maximaux contenant @\mathfrak{a}@.
+Pour l&rsquo;autre inclusion, la version faible du Nullstellensatz nous donne que tous les idéaux maximaux de @k[x_1,\dots,x_n]@ sont précisément ceux de la forme @(x_1-a_1,\dots,x_n-a_n)@ pour @a\in \mathbb{A}^n(k)@.</p>
+<p>Il est utile de noter que @(x_1-a_1,\dots,x_n-a_n)@ est exactement le noyau de l&rsquo;application d&rsquo;évaluation, @\ker(\operatorname{ev}_a)@. En effet, il est évident que @(x_1-a_1,\dots,x_n-a_n)\subseteq \ker(\operatorname{ev}_a)@. Soit @f\in \ker(\operatorname{ev}_a)@; l&rsquo;astuce est de prendre un autre polynôme @g@ tel que @g(x-a)=f(x)@ (ça devrait vous rappeller <em>fortement</em> la preuve de l&rsquo;existence d&rsquo;une factorisation lorsque le polynôme n&rsquo;a qu&rsquo;une seule variable, où le truc consiste à enlever le terme constant du polynôme qu&rsquo;on cherche à factoriser). Alors par construction @g\in\ker(\operatorname{ev}_0)@ et il est clair que @\ker(\operatorname{ev}_0)=(x_1,\dots,x_n)@. Donc @f(x)=(x_1-a_1)p_1(x)+\dots+(x_n-a_n)p_n(x)@, ce qui démontre que @(x_1-a_1,\dots,x_n-a_n)\supseteq \ker(\operatorname{ev}_a)@. Un corollaire immédiat est que @\ker(\operatorname{ev}_a)@ est un idéal maximal puisque @k@ est un corps (mais nous savions déjà cela).</p>
+<p>Soit @x\in Z(\mathfrak{a})@. Clairement @\mathfrak{a}\subseteq \ker(\operatorname{ev}_x)@, d&rsquo;où nous concluons que @\bigcap_{i\in I}\mathfrak{m}_i \subseteq \ker(\operatorname{ev}_x)@. Comme c&rsquo;est vrai pour chaque @x@,
+</p>
+@@\bigcap_{i\in I}\mathfrak{m}_i\subseteq \bigcap_{x\in Z(\mathfrak{a})} \ker(\operatorname{ev}_x)@@<p>
+et si nous avons un polynôme @f\in \bigcap_{i\in I}\mathfrak{m}_i@, nous pouvons conclure que @f@ s&rsquo;annule sur tous les éléments de @Z(\mathfrak{a})@, i.e. @f\in I(Z(\mathfrak{a}))=\sqrt{\mathfrak{a}}@.</p>
+
+      </div></div>
+
+  
+    
+<div class="pagination">
+  <div class="pagination__title">
+    <span class="pagination__title-h">Read other posts</span>
+    <hr />
+  </div>
+  <div class="pagination__buttons">
+    
+      <a href="//localhost:1313/posts/2025-02-03-filters/" class="button inline prev">
+        &lt; [<span class="button__text">Filters are generalized subsets</span>]
+      </a>
+    
+    
+      ::
+    
+    
+      <a href="//localhost:1313/posts/2023-02-17-serie-de-laurent/" class="button inline next">
+         [<span class="button__text">L&#39;existence et l&#39;unicité de l&#39;expansion en série de Laurent</span>] &gt;
+      </a>
+    
+  </div>
+</div>
+
+
+  
+
+  
+    
+
+  
+</article>
+
+  </div>
+
+  
+    <footer class="footer">
+  <div class="footer__inner">
+    
+      <div class="copyright">
+        <span>© 2026 Powered by <a href="https://gohugo.io">Hugo</a></span>
+    
+      <span>:: <a href="https://github.com/panr/hugo-theme-terminal" target="_blank">Theme</a> made by <a href="https://github.com/panr" target="_blank">panr</a></span>
+      </div>
+  </div>
+</footer>
+
+
+
+
+
+
+<script type="text/javascript" src="/bundle.min.js"></script>
+
+
+<div id="wcb" class="carbonbadge wcb-d"></div>
+<script src="https://unpkg.com/website-carbon-badges@1.1.3/b.min.js" defer></script>
+
+  
+</div>
+
+</body>
+</html>
